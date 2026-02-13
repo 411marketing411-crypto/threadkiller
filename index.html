@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThreadKiller AI - Turn Email Chaos Into Clarity</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -24,7 +23,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             background: var(--light);
             color: var(--primary);
             line-height: 1.6;
@@ -38,7 +37,7 @@
         }
 
         .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             margin-bottom: 1rem;
@@ -85,7 +84,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
         }
 
         .stat-label {
@@ -135,7 +134,7 @@
         .usage-count {
             font-size: 2rem;
             font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
         }
 
         .upgrade-btn {
@@ -156,7 +155,7 @@
         }
 
         h2 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             font-size: 2rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
@@ -176,7 +175,7 @@
             border: 2px solid var(--border);
             border-radius: 15px;
             font-size: 1rem;
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             resize: vertical;
             transition: border-color 0.3s;
         }
@@ -207,7 +206,7 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
         }
 
         .btn-primary {
@@ -306,7 +305,7 @@
         }
 
         .summary-section h3 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             color: var(--primary);
             margin-bottom: 1rem;
             display: flex;
@@ -327,7 +326,7 @@
         }
 
         .section h3 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             font-size: 1.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
@@ -510,7 +509,7 @@
         .price-amount {
             font-size: 2.5rem;
             font-weight: 700;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             color: var(--secondary);
             margin-bottom: 0.5rem;
         }
@@ -618,6 +617,39 @@
         .cross {
             color: #94A3B8;
         }
+
+        /* Waitlist form */
+        .waitlist-form {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+
+        .waitlist-form input:focus {
+            outline: none;
+            border-color: var(--purple);
+        }
+
+        .waitlist-success {
+            background: #D1FAE5;
+            color: #065F46;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -655,7 +687,7 @@
 
             <div id="limitReached" class="limit-reached" style="display: none;">
                 <h3>🎯 You've hit your free limit!</h3>
-                <p>You've analyzed 3 threads this month. Upgrade to Pro for unlimited AI-powered analysis.</p>
+                <p>You've analyzed 3 threads this month. Join the waitlist for Pro — unlimited AI-powered analysis.</p>
                 <div class="pricing-preview">
                     <div class="price-card featured">
                         <div class="price-name">Pro - AI Powered</div>
@@ -668,7 +700,11 @@
                             <li>Saved library</li>
                             <li>Chrome extension</li>
                         </ul>
-                        <button class="btn-primary" onclick="alert('Payment integration coming soon! Email hello@threadkiller.ai for early access pricing.')">Upgrade Now</button>
+                        <div class="waitlist-form">
+                            <input type="email" id="limitEmail" placeholder="your@email.com" />
+                            <button class="btn-primary" style="flex: none; padding: 0.9rem 1.5rem; font-size: 1rem;" onclick="joinWaitlist('limitEmail', 'limitSuccess')">Join Waitlist</button>
+                        </div>
+                        <div class="waitlist-success" id="limitSuccess">🎉 You're on the list! We'll email you when Pro launches.</div>
                     </div>
                 </div>
             </div>
@@ -757,7 +793,7 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
 
             <div class="upgrade-callout">
                 <h4>⚡ Want Even Better Analysis?</h4>
-                <p>Upgrade to Pro for AI-powered deep analysis that understands context, tone, and complex relationships.</p>
+                <p>Join the waitlist for Pro — AI-powered analysis that understands context, tone, and complex relationships.</p>
                 <ul>
                     <li>Detects implicit decisions and commitments</li>
                     <li>Understands sarcasm and subtext</li>
@@ -765,9 +801,11 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
                     <li>Extracts nuanced action items</li>
                     <li>Unlimited analyses per month</li>
                 </ul>
-                <button class="btn-primary" onclick="window.location.hash='pricing'" style="margin-top: 1rem;">
-                    Upgrade to Pro - $15/month
-                </button>
+                <div class="waitlist-form" style="max-width: 450px; margin: 1rem auto 0;">
+                    <input type="email" id="resultsEmail" placeholder="your@email.com" />
+                    <button class="btn-primary" style="flex: none; padding: 0.9rem 1.5rem; font-size: 1rem;" onclick="joinWaitlist('resultsEmail', 'resultsSuccess')">Join Waitlist - $15/mo</button>
+                </div>
+                <div class="waitlist-success" id="resultsSuccess">🎉 You're on the list! We'll email you when Pro launches.</div>
             </div>
         </div>
     </div>
@@ -851,7 +889,11 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
                     <li>Chrome extension</li>
                     <li>Priority support</li>
                 </ul>
-                <button class="btn-primary" onclick="alert('Coming soon! Email hello@threadkiller.ai for early access pricing.')">Upgrade to Pro</button>
+                <div class="waitlist-form">
+                    <input type="email" id="footerEmail" placeholder="your@email.com" />
+                    <button class="btn-primary" style="flex: none; padding: 0.9rem 1.5rem; font-size: 1rem;" onclick="joinWaitlist('footerEmail', 'footerSuccess')">Join Waitlist</button>
+                </div>
+                <div class="waitlist-success" id="footerSuccess">🎉 You're on the list!</div>
             </div>
         </div>
         
@@ -861,46 +903,82 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
 
     <script>
         const FREE_LIMIT = 3;
-        const isPro = false; // Set to true when user pays
+        const isPro = false;
 
-        // Usage tracking
+        // ✅ FIXED: Safe storage that works in WhatsApp, LinkedIn, Instagram in-app browsers
+        const safeStorage = {
+            _fallback: {},
+            get: function(key) {
+                try {
+                    return localStorage.getItem(key);
+                } catch(e) {
+                    return this._fallback[key] || null;
+                }
+            },
+            set: function(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                } catch(e) {
+                    this._fallback[key] = value;
+                }
+            }
+        };
+
         function getThreadsUsed() {
-            const data = JSON.parse(localStorage.getItem('threadkiller_usage') || '{}');
-            const currentMonth = new Date().toISOString().slice(0, 7);
-            
-            if (data.month !== currentMonth) {
+            try {
+                const data = JSON.parse(safeStorage.get('threadkiller_usage') || '{}');
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                if (data.month !== currentMonth) return 0;
+                return data.count || 0;
+            } catch(e) {
                 return 0;
             }
-            return data.count || 0;
         }
 
         function incrementThreadsUsed() {
-            const currentMonth = new Date().toISOString().slice(0, 7);
-            const count = getThreadsUsed() + 1;
-            
-            localStorage.setItem('threadkiller_usage', JSON.stringify({
-                month: currentMonth,
-                count: count
-            }));
-            
-            updateUsageBanner();
-            return count;
+            try {
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                const count = getThreadsUsed() + 1;
+                safeStorage.set('threadkiller_usage', JSON.stringify({
+                    month: currentMonth,
+                    count: count
+                }));
+                updateUsageBanner();
+                return count;
+            } catch(e) {
+                return 1;
+            }
         }
 
         function updateUsageBanner() {
             const used = getThreadsUsed();
             document.getElementById('threadsUsed').textContent = used;
-            
             if (used >= FREE_LIMIT && !isPro) {
                 document.getElementById('limitReached').style.display = 'block';
                 document.getElementById('analyzeBtn').disabled = true;
             }
         }
 
-        // Initialize
+        // Waitlist email capture
+        function joinWaitlist(inputId, successId) {
+            const email = document.getElementById(inputId).value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            // Store locally for now — replace with your backend/Mailchimp/etc later
+            try {
+                const existing = JSON.parse(safeStorage.get('tk_waitlist') || '[]');
+                existing.push({ email, date: new Date().toISOString() });
+                safeStorage.set('tk_waitlist', JSON.stringify(existing));
+            } catch(e) {}
+
+            document.getElementById(inputId).value = '';
+            document.getElementById(successId).style.display = 'block';
+        }
+
         updateUsageBanner();
 
-        // Example threads
         const examples = {
             project: `Subject: Q4 Product Launch - Timeline Update
 
@@ -1087,17 +1165,13 @@ John`
             error.classList.add('show');
         }
 
-        // Smart template-based analysis (FREE TIER - NO API COST)
         function analyzeThreadTemplate(threadText) {
             const emails = threadText.split(/---+/).filter(e => e.trim());
-            
-            // Extract key information using patterns
             const decisions = [];
             const actions = [];
             const questions = [];
             const timeline = [];
             
-            // Simple pattern matching for decisions
             const decisionPatterns = /(?:decision|decided|approved|confirmed|we're doing|final call|going with)/i;
             const actionPatterns = /(?:need to|should|must|can you|please|by \w+day|deadline|due)/i;
             const questionPatterns = /\?/;
@@ -1112,49 +1186,31 @@ John`
                 
                 lines.forEach(line => {
                     if (decisionPatterns.test(line) && line.length > 20) {
-                        decisions.push({
-                            decision: line.trim(),
-                            who: from,
-                            when: date
-                        });
+                        decisions.push({ decision: line.trim(), who: from, when: date });
                     }
-                    
                     if (actionPatterns.test(line) && line.length > 15) {
                         const deadlineMatch = line.match(/by (\w+day|EOD|end of \w+|\w+ \d+)/i);
-                        actions.push({
-                            task: line.trim(),
-                            owner: from,
-                            deadline: deadlineMatch ? deadlineMatch[1] : null
-                        });
+                        actions.push({ task: line.trim(), owner: from, deadline: deadlineMatch ? deadlineMatch[1] : null });
                     }
-                    
                     if (questionPatterns.test(line) && line.length > 10) {
-                        questions.push({
-                            question: line.trim(),
-                            context: `Asked by ${from}`
-                        });
+                        questions.push({ question: line.trim(), context: `Asked by ${from}` });
                     }
                 });
                 
                 if (dateMatch) {
                     const eventLine = lines.find(l => l.length > 30 && !l.includes('From:') && !l.includes('To:') && !l.includes('Subject:'));
                     if (eventLine) {
-                        timeline.push({
-                            date: date.split(' ').slice(0, 3).join(' '),
-                            event: eventLine.substring(0, 100)
-                        });
+                        timeline.push({ date: date.split(' ').slice(0, 3).join(' '), event: eventLine.substring(0, 100) });
                     }
                 }
             });
             
-            // Generate summary
             const summary = `Email thread with ${emails.length} messages discussing ${
                 decisions.length > 0 ? 'decisions about project timeline and budget' :
                 actions.length > 0 ? 'action items and next steps' :
                 'ongoing communication and coordination'
             }.`;
             
-            // Extract context
             const allText = threadText.toLowerCase();
             const contextTopics = [];
             if (allText.includes('budget')) contextTopics.push('budget discussions');
@@ -1184,11 +1240,10 @@ John`
                 return;
             }
 
-            // Check usage limit for free tier
             if (!isPro) {
                 const used = getThreadsUsed();
                 if (used >= FREE_LIMIT) {
-                    showError('You\'ve reached your free limit of 3 threads per month. Upgrade to Pro for unlimited AI-powered analysis!');
+                    showError('You\'ve reached your free limit of 3 threads. Join the waitlist for Pro — unlimited AI-powered analysis!');
                     document.getElementById('limitReached').style.display = 'block';
                     return;
                 }
@@ -1205,15 +1260,10 @@ John`
             analyzeBtn.disabled = true;
 
             try {
-                // Simulate processing time
                 await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Use template-based analysis (FREE - no API cost)
                 const analysis = analyzeThreadTemplate(threadInput);
-                
                 displayResults(analysis);
                 incrementThreadsUsed();
-                
             } catch (err) {
                 console.error('Error:', err);
                 showError('Something went wrong analyzing the thread. Please try again.');
@@ -1224,10 +1274,8 @@ John`
         }
 
         function displayResults(analysis) {
-            // Summary
             document.getElementById('oneLiner').textContent = analysis.summary;
 
-            // Decisions
             const decisionsHtml = analysis.decisions.length > 0 ? analysis.decisions.map(d => `
                 <div class="item">
                     <div class="item-content">${d.decision}</div>
@@ -1236,7 +1284,6 @@ John`
             `).join('') : '<p style="color: #64748B;">No explicit decisions found in this thread.</p>';
             document.getElementById('decisions').innerHTML = decisionsHtml;
 
-            // Actions
             const actionsHtml = analysis.actions.length > 0 ? analysis.actions.map(a => `
                 <div class="item">
                     <div class="item-content">${a.task}</div>
@@ -1245,7 +1292,6 @@ John`
             `).join('') : '<p style="color: #64748B;">No action items identified.</p>';
             document.getElementById('actions').innerHTML = actionsHtml;
 
-            // Questions
             const questionsHtml = analysis.questions.length > 0 ? analysis.questions.map(q => `
                 <div class="item">
                     <div class="item-content">${q.question}</div>
@@ -1254,7 +1300,6 @@ John`
             `).join('') : '<p style="color: #64748B;">No unresolved questions.</p>';
             document.getElementById('questions').innerHTML = questionsHtml;
 
-            // Timeline
             const timelineHtml = analysis.timeline.length > 0 ? analysis.timeline.map(t => `
                 <div class="timeline-item">
                     <div class="timeline-date">${t.date}</div>
@@ -1263,15 +1308,11 @@ John`
             `).join('') : '<p style="color: #64748B;">Timeline information not available.</p>';
             document.getElementById('timeline').innerHTML = timelineHtml;
 
-            // Context
             document.getElementById('context').textContent = analysis.context;
-
-            // Show results
             document.getElementById('results').classList.add('show');
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        // Allow Enter+Cmd/Ctrl to submit
         document.getElementById('threadInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
                 analyzeThread();
