@@ -3,659 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThreadKiller AI - Turn Email Chaos Into Clarity</title>
+    <title>ThreadKiller AI - Instant Email Thread Analysis. No Inbox Access Needed.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #0F172A;
             --secondary: #3B82F6;
             --accent: #10B981;
             --danger: #EF4444;
             --warning: #F59E0B;
-            --light: #F8FAFC;
-            --border: #E2E8F0;
-            --purple: #8B5CF6;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            background: var(--light);
-            color: var(--primary);
-            line-height: 1.6;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #1E293B 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-        }
-
-        .hero .tagline {
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .tier-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .tier-badge.free {
-            background: linear-gradient(135deg, var(--accent), #059669);
-        }
-
-        .tier-badge.pro {
-            background: linear-gradient(135deg, var(--purple), #7C3AED);
-        }
-
-        .hero .stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: -3rem auto 3rem;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .usage-banner {
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .usage-banner.pro {
-            background: linear-gradient(135deg, var(--purple), #7C3AED);
-        }
-
-        .usage-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .usage-count {
-            font-size: 2rem;
-            font-weight: 700;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-        }
-
-        .upgrade-btn {
-            background: white;
-            color: var(--secondary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .upgrade-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        h2 {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 300px;
-            padding: 1.5rem;
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            font-size: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
-
-        .helper-text {
-            font-size: 0.9rem;
-            color: #64748B;
-            margin-top: 0.5rem;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 1.2rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            color: white;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-secondary {
-            background: var(--light);
-            color: var(--primary);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            border-color: var(--secondary);
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .loading.show {
-            display: block;
-        }
-
-        .spinner {
-            border: 4px solid var(--border);
-            border-top: 4px solid var(--secondary);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1.5rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .results {
-            display: none;
-        }
-
-        .results.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tier-indicator {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .tier-indicator.free {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-
-        .tier-indicator.pro {
-            background: #EDE9FE;
-            color: #5B21B6;
-        }
-
-        .summary-section {
-            background: linear-gradient(135deg, #EEF2FF, #F0FDF4);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--secondary);
-        }
-
-        .summary-section h3 {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .one-liner {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary);
-            line-height: 1.4;
-            margin-bottom: 1rem;
-        }
-
-        .section {
-            margin-bottom: 2.5rem;
-        }
-
-        .section h3 {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .item {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--secondary);
-            transition: all 0.3s;
-        }
-
-        .item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .item-content {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-meta {
-            font-size: 0.9rem;
-            color: #64748B;
-            font-style: italic;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--secondary);
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px var(--secondary);
-        }
-
-        .timeline-date {
-            font-weight: 600;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .error {
-            background: #FEE2E2;
-            border: 2px solid #FCA5A5;
-            color: #991B1B;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            display: none;
-        }
-
-        .error.show {
-            display: block;
-        }
-
-        .limit-reached {
-            background: linear-gradient(135deg, #FEF3C7, #FEE2E2);
-            border: 3px solid var(--warning);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .limit-reached h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-
-        .limit-reached p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .upgrade-callout {
-            background: linear-gradient(135deg, #EDE9FE, #DBEAFE);
-            border: 2px solid var(--purple);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .upgrade-callout h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--purple);
-        }
-
-        .upgrade-callout ul {
-            list-style: none;
-            margin: 1.5rem 0;
-            text-align: left;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .upgrade-callout li {
-            padding: 0.5rem 0;
-            font-size: 1.05rem;
-        }
-
-        .upgrade-callout li::before {
-            content: '⚡ ';
-            margin-right: 0.5rem;
-        }
-
-        .pricing-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .price-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .price-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .price-card.featured {
-            border-color: var(--purple);
-            background: linear-gradient(135deg, #EDE9FE, white);
-            transform: scale(1.05);
-        }
-
-        .price-name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .price-amount {
-            font-size: 2.5rem;
-            font-weight: 700;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .price-card.featured .price-amount {
-            color: var(--purple);
-        }
-
-        .price-period {
-            color: #64748B;
-            margin-bottom: 1rem;
-        }
-
-        .price-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .price-features li {
-            padding: 0.5rem 0;
-            font-size: 0.95rem;
-        }
-
-        .price-features li::before {
-            content: '✓ ';
-            color: var(--accent);
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: #64748B;
-        }
-
-        .examples {
-            background: #F8FAFC;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-        }
-
-        .examples h4 {
-            font-size: 0.9rem;
-            color: #64748B;
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .example-item {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .example-item:hover {
-            border-color: var(--secondary);
-            transform: translateX(5px);
-        }
-
-        .example-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .example-desc {
-            font-size: 0.85rem;
-            color: #64748B;
-        }
-
-        .comparison-table {
-            margin: 2rem 0;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .check {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .cross {
-            color: #94A3B8;
-        }
-
-        /* Waitlist form */
-        .waitlist-form {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .waitlist-form input {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.9rem 1.2rem;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-        }
-
-        .waitlist-form input:focus {
-            outline: none;
-            border-color: var(--purple);
-        }
-
-        .waitlist-success {
-            background: #D1FAE5;
-            color: #065F46;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 600;
-            margin-top: 1rem;
-            display: none;
-        }
+            --light: #E8EDF5;
+            --border: #CBD5E1;
+            --purple: #6D28D9;
+        }
+        body { font-family: 'Inter', sans-serif; background: #6B7280; color: var(--primary); line-height: 1.6; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1E293B 100%); color: white; padding: 4rem 2rem; text-align: center; }
+        .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.1; text-shadow: 2px 2px 8px rgba(0,0,0,0.4); color: #B8926A; }
+        .hero .tagline { font-size: clamp(1.1rem, 3vw, 1.5rem); opacity: 0.9; margin-bottom: 2rem; font-weight: 300; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); color: #B8926A; }
+        .tier-badge { display: inline-block; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-top: 1rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); }
+        .tier-badge.free { background: linear-gradient(135deg, var(--accent), #059669); }
+        .tier-badge.pro { background: linear-gradient(135deg, var(--purple), #7C3AED); }
+        .tier-badge.business { background: linear-gradient(135deg, #F59E0B, #D97706); }
+        .hero .stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: 700; color: var(--accent); font-family: 'Space Grotesk', sans-serif; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; color: #B8926A; }
+        .container { max-width: 1000px; margin: -3rem auto 3rem; padding: 0 2rem; position: relative; z-index: 10; }
+        .card { background: #B8926A; border-radius: 20px; padding: 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.12); margin-bottom: 2rem; }
+        .usage-banner { background: #6B7280; color: white; padding: 1rem 2rem; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .usage-banner.pro { background: linear-gradient(135deg, var(--purple), #7C3AED); }
+        .usage-banner.business { background: linear-gradient(135deg, #F59E0B, #D97706); }
+        .usage-info { display: flex; align-items: center; gap: 1rem; }
+        .usage-count { font-size: 2rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: #B8926A; }
+        .upgrade-btn { background: #6B7280; color: white; padding: 0.75rem 1.5rem; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+        .upgrade-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary); }
+        label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--primary); }
+        textarea { width: 100%; min-height: 300px; padding: 1.5rem; border: 2px solid #A07850; border-radius: 15px; font-size: 1rem; font-family: 'Inter', sans-serif; resize: vertical; transition: border-color 0.3s; background: #B8926A; color: #000000; }
+        textarea::placeholder { color: #1F2937; opacity: 1; }
+        textarea:focus { outline: none; border-color: var(--secondary); }
+        .helper-text { font-size: 0.9rem; color: #1F2937; margin-top: 0.5rem; }
+        .button-group { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        button { padding: 1.2rem 2.5rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white; flex: 1; min-width: 200px; }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(59,130,246,0.3); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary { background: #B8926A; color: #1F2937; border: 2px solid #A07850; }
+        .btn-secondary:hover { background: white; border-color: var(--secondary); }
+        .loading { display: none; text-align: center; padding: 3rem; }
+        .loading.show { display: block; }
+        .spinner { border: 4px solid var(--border); border-top: 4px solid var(--secondary); border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 0 auto 1.5rem; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .results { display: none; }
+        .results.show { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .tier-indicator { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .tier-indicator.free { background: #D1FAE5; color: #065F46; }
+        .tier-indicator.pro { background: #EDE9FE; color: #5B21B6; }
+        .tier-indicator.business { background: #FEF3C7; color: #92400E; }
+        .summary-section { background: linear-gradient(135deg, #EEF2FF, #F0FDF4); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 5px solid var(--secondary); }
+        .summary-section h3 { font-family: 'Space Grotesk', sans-serif; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .one-liner { font-size: 1.3rem; font-weight: 600; color: var(--primary); line-height: 1.4; margin-bottom: 1rem; }
+        .section { margin-bottom: 2.5rem; }
+        .section h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .item-list { display: flex; flex-direction: column; gap: 1rem; }
+        .item { background: #E8EDF5; padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--secondary); transition: all 0.3s; }
+        .item:hover { transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .item-content { font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem; }
+        .item-meta { font-size: 0.9rem; color: #1F2937; font-style: italic; }
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-item { position: relative; padding-bottom: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -2.5rem; top: 0.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--secondary); border: 3px solid white; box-shadow: 0 0 0 2px var(--secondary); }
+        .timeline-date { font-weight: 600; color: var(--secondary); margin-bottom: 0.5rem; }
+        .error { background: #FEE2E2; border: 2px solid #FCA5A5; color: #991B1B; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; display: none; }
+        .error.show { display: block; }
+        .limit-reached { background: linear-gradient(135deg, #FEF3C7, #FEE2E2); border: 3px solid var(--warning); padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem; }
+        .limit-reached h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.8rem; }
+        .limit-reached p { margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .upgrade-callout { background: linear-gradient(135deg, #EDE9FE, #DBEAFE); border: 2px solid var(--purple); padding: 2rem; border-radius: 15px; margin-top: 2rem; text-align: center; }
+        .upgrade-callout h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--purple); }
+        .upgrade-callout ul { list-style: none; margin: 1.5rem 0; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .upgrade-callout li { padding: 0.5rem 0; font-size: 1.05rem; }
+        .upgrade-callout li::before { content: '⚡ '; margin-right: 0.5rem; }
+        .pricing-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .price-card { background: #6B7280; padding: 1.5rem; border-radius: 12px; border: 2px solid var(--border); transition: all 0.3s; }
+        .price-card:hover { border-color: var(--secondary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .price-card.featured { border-color: var(--purple); background: #6B7280; transform: scale(1.05); }
+        .price-name { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .price-amount { font-size: 2.5rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: var(--secondary); margin-bottom: 0.5rem; }
+        .price-card.featured .price-amount { color: var(--purple); }
+        .price-period { color: #1F2937; margin-bottom: 1rem; }
+        .price-features { list-style: none; margin-bottom: 1.5rem; }
+        .price-features li { padding: 0.5rem 0; font-size: 0.95rem; }
+        .price-features li::before { content: '✓ '; color: var(--accent); font-weight: 700; margin-right: 0.5rem; }
+        .price-features li.coming-soon { color: #000000; }
+        .price-features li.coming-soon::before { content: '🔜 '; color: #94A3B8; }
+        .footer { text-align: center; padding: 3rem 2rem; color: #1F2937; background: #6B7280; }
+        .examples { background: #B8926A; padding: 1.5rem; border-radius: 12px; margin-top: 1rem; }
+        .examples h4 { font-size: 0.9rem; color: #000000; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .example-item { background: #B8926A; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.3s; border: 1px solid #A0714F; color: #1F2937; }
+        .example-item:hover { border-color: var(--secondary); transform: translateX(5px); }
+        .example-title { font-weight: 600; color: #1F2937; margin-bottom: 0.25rem; }
+        .example-desc { font-size: 0.85rem; color: #1F2937; }
+        .comparison-table { margin: 2rem 0; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #9CA3AF; }
+        tr { background: #6B7280; color: #000000; }
+        th { background: #6B7280; font-weight: 600; color: #000000; }
+        .check { color: var(--accent); font-weight: 700; }
+        .cross { color: #000000; }
+        .coming-soon-cell { color: #000000; font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <div class="hero">
         <h1>ThreadKiller AI</h1>
-        <p class="tagline">Turn 50-email threads into actionable insights in 30 seconds</p>
+        <p class="tagline">Gmail summarizes. ThreadKiller extracts decisions, tracks accountability, and finds what's unresolved across any email platform.</p>
         <div class="tier-badge free" id="currentTier">Free Tier - Smart Analysis</div>
         <div class="stats">
             <div class="stat-item">
@@ -663,8 +128,8 @@
                 <div class="stat-label">Saved per week</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Context captured</div>
+                <div class="stat-number">0</div>
+                <div class="stat-label">Prompt needed</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">30 sec</div>
@@ -687,24 +152,33 @@
 
             <div id="limitReached" class="limit-reached" style="display: none;">
                 <h3>🎯 You've hit your free limit!</h3>
-                <p>You've analyzed 3 threads this month. Join the waitlist for Pro — unlimited AI-powered analysis.</p>
+                <p>You've analyzed 3 threads this month. Upgrade to Pro for unlimited AI-powered analysis.</p>
                 <div class="pricing-preview">
                     <div class="price-card featured">
-                        <div class="price-name">Pro - AI Powered</div>
-                        <div class="price-amount">$15<span style="font-size: 1rem;">/mo</span></div>
+                        <div class="price-name">Personal Pro</div>
+                        <div class="price-amount">£15<span style="font-size: 1rem;">/mo</span></div>
                         <div class="price-period">Billed monthly</div>
                         <ul class="price-features">
-                            <li>Unlimited AI analyses</li>
+                            <li>Unlimited AI analysis</li>
                             <li>Advanced context understanding</li>
-                            <li>Email forwarding</li>
-                            <li>Saved library</li>
-                            <li>Chrome extension</li>
+                            <li>Up to 2 users</li>
+                            <li>Priority support</li>
                         </ul>
-                        <div class="waitlist-form">
-                            <input type="email" id="limitEmail" placeholder="your@email.com" />
-                            <button class="btn-primary" style="flex: none; padding: 0.9rem 1.5rem; font-size: 1rem;" onclick="joinWaitlist('limitEmail', 'limitSuccess')">Join Waitlist</button>
-                        </div>
-                        <div class="waitlist-success" id="limitSuccess">🎉 You're on the list! We'll email you when Pro launches.</div>
+                        <button class="btn-primary" onclick="startCheckout('personal')">Upgrade Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-name">Business</div>
+                        <div class="price-amount">£29<span style="font-size: 1rem;">/mo</span></div>
+                        <div class="price-period">Billed monthly</div>
+                        <ul class="price-features">
+                            <li>Everything in Personal</li>
+                            <li>Up to 5 users</li>
+                            <li>Commercial use licence</li>
+                            <li>Priority support</li>
+                            <li>PDF Export</li>
+                            <li class="coming-soon">Slack Integration (Coming Soon)</li>
+                        </ul>
+                        <button class="btn-primary" onclick="startCheckout('business')">Upgrade Now</button>
                     </div>
                 </div>
             </div>
@@ -712,15 +186,13 @@
             <div class="error" id="error"></div>
 
             <h2>📧 Paste Your Email Thread</h2>
+            <p style="color: #1F2937; margin-top: -0.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;">Unlike Copilot or Gemini, ThreadKiller works on <strong>any</strong> email — no account connection needed.</p>
             
             <div>
                 <label for="threadInput">Copy and paste the entire email thread below:</label>
-                <textarea 
-                    id="threadInput" 
-                    placeholder="Paste your email thread here... include all the back-and-forth, replies, forwards - the messier the better! 
+                <textarea id="threadInput" placeholder="Paste your email thread here... include all the back-and-forth, replies, forwards - the messier the better! 
 
-Example: Include subject lines, from/to headers, timestamps, and the full message content of each email in the thread."
-                ></textarea>
+Example: Include subject lines, from/to headers, timestamps, and the full message content of each email in the thread."></textarea>
                 <div class="helper-text">
                     💡 <strong>Free Tier:</strong> Smart template-based analysis (instant results)
                     <br>
@@ -744,9 +216,7 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
                 <button class="btn-primary" onclick="analyzeThread()" id="analyzeBtn">
                     🚀 Analyze Thread <span class="tier-indicator free" id="tierBadge">Free - Smart</span>
                 </button>
-                <button class="btn-secondary" onclick="resetForm()">
-                    🔄 Clear
-                </button>
+                <button class="btn-secondary" onclick="resetForm()">🔄 Clear</button>
             </div>
         </div>
 
@@ -788,31 +258,35 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
 
             <div class="section">
                 <h3>💡 Critical Context</h3>
-                <div id="context" style="background: var(--light); padding: 1.5rem; border-radius: 12px; font-style: italic;"></div>
+                <div id="context" style="background: #E8EDF5; padding: 1.5rem; border-radius: 12px; font-style: italic;"></div>
             </div>
 
-            <div class="upgrade-callout">
+            <div id="pdfExportBtn" style="display:none; text-align: center; margin-bottom: 1.5rem;">
+                <button class="btn-secondary" onclick="exportPDF()" style="background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border: none;">
+                    📄 Download PDF Report
+                </button>
+            </div>
+
+            <div class="upgrade-callout" id="upgradeCallout">
                 <h4>⚡ Want Even Better Analysis?</h4>
-                <p>Join the waitlist for Pro — AI-powered analysis that understands context, tone, and complex relationships.</p>
+                <p>Upgrade to Pro for AI-powered deep analysis that understands context, tone, and complex relationships.</p>
                 <ul>
                     <li>Detects implicit decisions and commitments</li>
                     <li>Understands sarcasm and subtext</li>
                     <li>Identifies political dynamics and conflicts</li>
                     <li>Extracts nuanced action items</li>
-                    <li>Unlimited analyses per month</li>
+                    <li>Unlimited analysis per month</li>
                 </ul>
-                <div class="waitlist-form" style="max-width: 450px; margin: 1rem auto 0;">
-                    <input type="email" id="resultsEmail" placeholder="your@email.com" />
-                    <button class="btn-primary" style="flex: none; padding: 0.9rem 1.5rem; font-size: 1rem;" onclick="joinWaitlist('resultsEmail', 'resultsSuccess')">Join Waitlist - $15/mo</button>
-                </div>
-                <div class="waitlist-success" id="resultsSuccess">🎉 You're on the list! We'll email you when Pro launches.</div>
+                <button class="btn-primary" onclick="window.location.hash='pricing'" style="margin-top: 1rem;">
+                    Upgrade to Pro — from £15/month
+                </button>
             </div>
         </div>
     </div>
 
     <div class="footer" id="pricing">
         <h2 style="margin-bottom: 1rem; color: var(--primary);">Choose Your Plan</h2>
-        <p style="margin-bottom: 2rem; color: #64748B;">Start free, upgrade when you need AI-powered analysis</p>
+        <p style="margin-bottom: 2rem; color: #1F2937;">Start free, upgrade when you need AI-powered analysis</p>
         
         <div class="comparison-table">
             <table>
@@ -820,53 +294,27 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
                     <tr>
                         <th>Feature</th>
                         <th>Free</th>
-                        <th>Pro</th>
+                        <th>Personal Pro (£15/mo)</th>
+                        <th>Business (£29/mo)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Analyses per month</td>
-                        <td>3</td>
-                        <td class="check">Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>Analysis type</td>
-                        <td>Smart template-based</td>
-                        <td class="check">AI-powered (Claude Sonnet 4)</td>
-                    </tr>
-                    <tr>
-                        <td>Context understanding</td>
-                        <td>Basic</td>
-                        <td class="check">Advanced (nuance, tone, subtext)</td>
-                    </tr>
-                    <tr>
-                        <td>Email forwarding</td>
-                        <td class="cross">✗</td>
-                        <td class="check">✓</td>
-                    </tr>
-                    <tr>
-                        <td>Saved thread library</td>
-                        <td class="cross">✗</td>
-                        <td class="check">✓</td>
-                    </tr>
-                    <tr>
-                        <td>Chrome extension</td>
-                        <td class="cross">✗</td>
-                        <td class="check">✓</td>
-                    </tr>
-                    <tr>
-                        <td>Priority support</td>
-                        <td class="cross">✗</td>
-                        <td class="check">✓</td>
-                    </tr>
+                    <tr><td>Analyses per month</td><td>3</td><td class="check">Unlimited</td><td class="check">Unlimited</td></tr>
+                    <tr><td>Analysis type</td><td>Smart template-based</td><td class="check">AI-powered</td><td class="check">AI-powered</td></tr>
+                    <tr><td>Context understanding</td><td>Basic</td><td class="check">Advanced</td><td class="check">Advanced</td></tr>
+                    <tr><td>Users</td><td>1</td><td class="check">Up to 2</td><td class="check">Up to 5</td></tr>
+                    <tr><td>Commercial use licence</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+                    <tr><td>Priority support</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+                    <tr><td>PDF Export</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+                    <tr><td>Slack Integration</td><td class="cross">✗</td><td class="cross">✗</td><td class="coming-soon-cell">🔜 Coming Soon</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="pricing-preview" style="max-width: 700px; margin: 3rem auto 0;">
+        <div class="pricing-preview" style="max-width: 900px; margin: 3rem auto 0;">
             <div class="price-card">
                 <div class="price-name">Free</div>
-                <div class="price-amount">$0</div>
+                <div class="price-amount">£0</div>
                 <div class="price-period">Forever</div>
                 <ul class="price-features">
                     <li>3 threads per month</li>
@@ -878,76 +326,83 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
             </div>
             
             <div class="price-card featured">
-                <div class="price-name">Pro - AI Powered</div>
-                <div class="price-amount">$15<span style="font-size: 1rem;">/mo</span></div>
+                <div class="price-name">Personal Pro</div>
+                <div class="price-amount">£15<span style="font-size: 1rem;">/mo</span></div>
                 <div class="price-period">Billed monthly</div>
                 <ul class="price-features">
-                    <li>Unlimited AI analyses</li>
+                    <li>Unlimited AI analysis</li>
                     <li>Advanced context understanding</li>
-                    <li>Email forwarding</li>
-                    <li>Saved library & search</li>
-                    <li>Chrome extension</li>
+                    <li>Up to 2 users</li>
                     <li>Priority support</li>
                 </ul>
-                <div class="waitlist-form">
-                    <input type="email" id="footerEmail" placeholder="your@email.com" />
-                    <button class="btn-primary" style="flex: none; padding: 0.9rem 1.5rem; font-size: 1rem;" onclick="joinWaitlist('footerEmail', 'footerSuccess')">Join Waitlist</button>
-                </div>
-                <div class="waitlist-success" id="footerSuccess">🎉 You're on the list!</div>
+                <button class="btn-primary" onclick="startCheckout('personal')">Upgrade to Personal Pro</button>
+            </div>
+
+            <div class="price-card" style="border-color: #1E40AF; border-width: 2px;">
+                <div class="price-name">Business</div>
+                <div class="price-amount">£29<span style="font-size: 1rem;">/mo</span></div>
+                <div class="price-period">Billed monthly</div>
+                <ul class="price-features">
+                    <li>Everything in Personal</li>
+                    <li>Up to 5 users</li>
+                    <li>Commercial use licence</li>
+                    <li>Priority support</li>
+                    <li>PDF Export</li>
+                    <li class="coming-soon">Slack Integration (Coming Soon)</li>
+                </ul>
+                <button class="btn-primary" onclick="startCheckout('business')">Upgrade to Business</button>
             </div>
         </div>
-        
+
+        <p style="margin-top: 2rem; font-size: 0.95rem;">Business customers: email <a href="mailto:hello@mitchellsolutions.org" style="color: var(--secondary);">hello@mitchellsolutions.org</a> for priority support</p>
         <p style="margin-top: 3rem;">Built with ❤️ to save you from email hell</p>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Free tier uses smart extraction • Pro tier uses Claude AI (your payment covers API costs)</p>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         const FREE_LIMIT = 3;
-        const isPro = false;
 
-        // ✅ FIXED: Safe storage that works in WhatsApp, LinkedIn, Instagram in-app browsers
-        const safeStorage = {
-            _fallback: {},
-            get: function(key) {
-                try {
-                    return localStorage.getItem(key);
-                } catch(e) {
-                    return this._fallback[key] || null;
-                }
-            },
-            set: function(key, value) {
-                try {
-                    localStorage.setItem(key, value);
-                } catch(e) {
-                    this._fallback[key] = value;
-                }
+        function checkProStatus() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('access') === 'threadkiller2026') {
+                localStorage.setItem('threadkiller_pro', 'true');
+                localStorage.setItem('threadkiller_tier', 'business');
+                window.history.replaceState({}, '', window.location.pathname);
+                return true;
             }
+            if (params.get('success') === 'true') {
+                localStorage.setItem('threadkiller_pro', 'true');
+                localStorage.setItem('threadkiller_tier', params.get('tier') || 'personal');
+                window.history.replaceState({}, '', window.location.pathname);
+                return true;
+            }
+            return localStorage.getItem('threadkiller_pro') === 'true';
+        }
+
+        const isPro = checkProStatus();
+        const proTier = localStorage.getItem('threadkiller_tier') || 'personal';
+
+        const PAYMENT_LINKS = {
+            personal: 'https://buy.stripe.com/14A3cv6Ym16uaGZ75HdMI04',
+            business: 'https://buy.stripe.com/8x26oH5UiaH4cP775HdMI05'
         };
 
+        function startCheckout(tier) { window.location.href = PAYMENT_LINKS[tier]; }
+
         function getThreadsUsed() {
-            try {
-                const data = JSON.parse(safeStorage.get('threadkiller_usage') || '{}');
-                const currentMonth = new Date().toISOString().slice(0, 7);
-                if (data.month !== currentMonth) return 0;
-                return data.count || 0;
-            } catch(e) {
-                return 0;
-            }
+            const data = JSON.parse(localStorage.getItem('threadkiller_usage') || '{}');
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            if (data.month !== currentMonth) return 0;
+            return data.count || 0;
         }
 
         function incrementThreadsUsed() {
-            try {
-                const currentMonth = new Date().toISOString().slice(0, 7);
-                const count = getThreadsUsed() + 1;
-                safeStorage.set('threadkiller_usage', JSON.stringify({
-                    month: currentMonth,
-                    count: count
-                }));
-                updateUsageBanner();
-                return count;
-            } catch(e) {
-                return 1;
-            }
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            const count = getThreadsUsed() + 1;
+            localStorage.setItem('threadkiller_usage', JSON.stringify({ month: currentMonth, count: count }));
+            updateUsageBanner();
+            return count;
         }
 
         function updateUsageBanner() {
@@ -959,365 +414,149 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
             }
         }
 
-        // Waitlist email capture
-        function joinWaitlist(inputId, successId) {
-            const email = document.getElementById(inputId).value.trim();
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address.');
-                return;
+        function initUI() {
+            updateUsageBanner();
+            if (isPro) {
+                const isBusinessTier = proTier === 'business';
+                const tierLabel = isBusinessTier ? 'Business' : 'Personal Pro';
+                document.getElementById('currentTier').textContent = tierLabel + ' — Unlimited AI Analysis';
+                document.getElementById('currentTier').className = isBusinessTier ? 'tier-badge business' : 'tier-badge pro';
+                document.getElementById('usageBanner').className = isBusinessTier ? 'usage-banner business' : 'usage-banner pro';
+                document.getElementById('usageBanner').innerHTML = `
+                    <div class="usage-info">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700;">⚡ ${tierLabel}</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Unlimited AI-powered analysis active</div>
+                        </div>
+                    </div>
+                    <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.9rem;">Active</span>
+                `;
+                document.getElementById('tierBadge').textContent = isBusinessTier ? 'Business - AI' : 'Pro - AI';
+                document.getElementById('tierBadge').className = isBusinessTier ? 'tier-indicator business' : 'tier-indicator pro';
             }
-            // Store locally for now — replace with your backend/Mailchimp/etc later
-            try {
-                const existing = JSON.parse(safeStorage.get('tk_waitlist') || '[]');
-                existing.push({ email, date: new Date().toISOString() });
-                safeStorage.set('tk_waitlist', JSON.stringify(existing));
-            } catch(e) {}
-
-            document.getElementById(inputId).value = '';
-            document.getElementById(successId).style.display = 'block';
         }
 
-        updateUsageBanner();
+        initUI();
 
         const examples = {
-            project: `Subject: Q4 Product Launch - Timeline Update
-
-From: Sarah Chen <sarah@company.com>
-To: Team
-Date: Jan 15, 2026 9:30 AM
-
-Hey team,
-
-We need to push the Q4 launch back by 2 weeks. Development hit some blockers with the new API integration.
-
-Sarah
-
----
-
-From: Mike Rodriguez <mike@company.com>
-To: Sarah Chen
-Date: Jan 15, 2026 10:15 AM
-
-Sarah - that impacts our entire marketing timeline. Can we at least do a soft launch on the original date?
-
-Mike
-
----
-
-From: Sarah Chen
-To: Mike Rodriguez  
-Date: Jan 15, 2026 11:00 AM
-
-Mike - dev says soft launch is possible but risky. Let me check with the team and get back to you by EOD.
-
----
-
-From: Dev Team <dev@company.com>
-To: Sarah Chen
-Date: Jan 15, 2026 2:30 PM
-
-Sarah,
-
-Soft launch possible if we cut features A, B, and C. Full launch needs the extra 2 weeks for proper testing.
-
-Also heads up - budget is now $15K over due to the extra sprint. Need approval.
-
-Dev Team
-
----
-
-From: Sarah Chen
-To: All
-Date: Jan 16, 2026 9:00 AM
-
-Decision made: We're doing full launch on Feb 15 (2 weeks delayed). No soft launch - too risky.
-
-Budget increase approved - $15K additional for extra sprint.
-
-Mike - can marketing adjust to new timeline? Need confirmation by EOD.
-
-Sarah
-
----
-
-From: Mike Rodriguez
-To: Sarah Chen
-Date: Jan 16, 2026 4:45 PM
-
-Confirmed - marketing can adjust. Will need to notify our launch partners about the delay though.
-
-Who's handling partner communications?
-
----
-
-From: Sarah Chen  
-To: Mike Rodriguez
-Date: Jan 17, 2026 8:30 AM
-
-Good question - I'll take ownership of partner comms. Can you draft the key talking points by Friday?
-
-Also still waiting on legal to approve the new contract terms. Anyone heard from them?`,
-
-            sales: `Subject: Acme Corp - Enterprise Deal Discussion
-
-From: John Sales <john@ourcompany.com>
-To: Jane Buyer <jane@acmecorp.com>
-Date: Jan 10, 2026 2:00 PM
-
-Hi Jane,
-
-Great connecting yesterday! Here's our enterprise pricing as discussed:
-
-- 100 seats: $50/seat/month = $5,000/month
-- Annual contract: $60,000 (save $12,000 vs monthly)
-- Includes: Premium support, dedicated CSM, custom integrations
-
-Let me know your thoughts!
-
-John
-
----
-
-From: Jane Buyer
-To: John Sales
-Date: Jan 11, 2026 10:30 AM
-
-John - pricing is higher than we budgeted. We allocated $40K annually for this solution. Can you work with that number?
-
-Also, we'd need implementation support included in the price.
-
-Jane
-
----
-
-From: John Sales
-To: Jane Buyer
-Date: Jan 11, 2026 3:00 PM
-
-Let me talk to my manager about the pricing. Implementation support typically costs $5K extra, but I might be able to bundle it.
-
-Can you do $45K annual if we include implementation support?
-
----
-
-From: Jane Buyer
-To: John Sales
-Date: Jan 12, 2026 9:15 AM
-
-$45K could work, but we need a few contract changes:
-
-1. 30-day cancellation clause (not 90-day)
-2. Built-in data export tools
-3. Quarterly business reviews with our executive team
-
-Can your legal team accommodate these?
-
----
-
-From: John Sales
-To: Jane Buyer
-Date: Jan 12, 2026 2:30 PM
-
-Checking with legal on #1 and #3. Good news - we already have #2 built into the platform.
-
-Quick question - when do you need this implemented by? We're booking February implementations now.
-
----
-
-From: Jane Buyer
-To: John Sales
-Date: Jan 13, 2026 11:00 AM
-
-We need to be live by March 1st for our Q2 planning cycle. Is Feb implementation realistic for that go-live date?
-
-Also, just realized - we need SSO integration with Okta. Is that included or an add-on?
-
----
-
-From: John Sales
-To: Jane Buyer
-Date: Jan 13, 2026 4:00 PM
-
-March 1 is tight but doable if we start the contract process by Jan 20th.
-
-Great news - SSO with Okta is included in Enterprise tier at no extra cost!
-
-Legal approved both the 30-day cancellation AND quarterly executive reviews. We're good to proceed.
-
-Ready to move forward with the $45K annual contract?
-
-John`
+            project: `Subject: Q4 Product Launch - Timeline Update\n\nFrom: Sarah Chen <sarah@company.com>\nTo: Team\nDate: Jan 15, 2026 9:30 AM\n\nHey team,\n\nWe need to push the Q4 launch back by 2 weeks. Development hit some blockers with the new API integration.\n\nSarah\n\n---\n\nFrom: Mike Rodriguez <mike@company.com>\nTo: Sarah Chen\nDate: Jan 15, 2026 10:15 AM\n\nSarah - that impacts our entire marketing timeline. Can we at least do a soft launch on the original date?\n\nMike\n\n---\n\nFrom: Sarah Chen\nTo: Mike Rodriguez\nDate: Jan 15, 2026 11:00 AM\n\nMike - dev says soft launch is possible but risky. Let me check with the team and get back to you by EOD.\n\n---\n\nFrom: Dev Team <dev@company.com>\nTo: Sarah Chen\nDate: Jan 15, 2026 2:30 PM\n\nSarah,\n\nSoft launch possible if we cut features A, B, and C. Full launch needs the extra 2 weeks for proper testing.\n\nAlso heads up - budget is now $15K over due to the extra sprint. Need approval.\n\nDev Team\n\n---\n\nFrom: Sarah Chen\nTo: All\nDate: Jan 16, 2026 9:00 AM\n\nDecision made: We're doing full launch on Feb 15 (2 weeks delayed). No soft launch - too risky.\n\nBudget increase approved - $15K additional for extra sprint.\n\nMike - can marketing adjust to new timeline? Need confirmation by EOD.\n\nSarah\n\n---\n\nFrom: Mike Rodriguez\nTo: Sarah Chen\nDate: Jan 16, 2026 4:45 PM\n\nConfirmed - marketing can adjust. Will need to notify our launch partners about the delay though.\n\nWho's handling partner communications?\n\n---\n\nFrom: Sarah Chen\nTo: Mike Rodriguez\nDate: Jan 17, 2026 8:30 AM\n\nGood question - I'll take ownership of partner comms. Can you draft the key talking points by Friday?\n\nAlso still waiting on legal to approve the new contract terms. Anyone heard from them?`,
+            sales: `Subject: Acme Corp - Enterprise Deal Discussion\n\nFrom: John Sales <john@ourcompany.com>\nTo: Jane Buyer <jane@acmecorp.com>\nDate: Jan 10, 2026 2:00 PM\n\nHi Jane,\n\nGreat connecting yesterday! Here's our enterprise pricing as discussed:\n\n- 100 seats: $50/seat/month = $5,000/month\n- Annual contract: $60,000 (save $12,000 vs monthly)\n- Includes: Premium support, dedicated CSM, custom integrations\n\nLet me know your thoughts!\n\nJohn\n\n---\n\nFrom: Jane Buyer\nTo: John Sales\nDate: Jan 11, 2026 10:30 AM\n\nJohn - pricing is higher than we budgeted. We allocated $40K annually for this solution. Can you work with that number?\n\nAlso, we'd need implementation support included in the price.\n\nJane\n\n---\n\nFrom: John Sales\nTo: Jane Buyer\nDate: Jan 11, 2026 3:00 PM\n\nLet me talk to my manager about the pricing. Implementation support typically costs $5K extra, but I might be able to bundle it.\n\nCan you do $45K annual if we include implementation support?\n\n---\n\nFrom: Jane Buyer\nTo: John Sales\nDate: Jan 12, 2026 9:15 AM\n\n$45K could work, but we need a few contract changes:\n\n1. 30-day cancellation clause (not 90-day)\n2. Built-in data export tools\n3. Quarterly business reviews with our executive team\n\nCan your legal team accommodate these?\n\n---\n\nFrom: John Sales\nTo: Jane Buyer\nDate: Jan 12, 2026 2:30 PM\n\nChecking with legal on #1 and #3. Good news - we already have #2 built into the platform.\n\nQuick question - when do you need this implemented by? We're booking February implementations now.\n\n---\n\nFrom: Jane Buyer\nTo: John Sales\nDate: Jan 13, 2026 11:00 AM\n\nWe need to be live by March 1st for our Q2 planning cycle. Is Feb implementation realistic for that go-live date?\n\nAlso, just realized - we need SSO integration with Okta. Is that included or an add-on?\n\n---\n\nFrom: John Sales\nTo: Jane Buyer\nDate: Jan 13, 2026 4:00 PM\n\nMarch 1 is tight but doable if we start the contract process by Jan 20th.\n\nGreat news - SSO with Okta is included in Enterprise tier at no extra cost!\n\nLegal approved both the 30-day cancellation AND quarterly executive reviews. We're good to proceed.\n\nReady to move forward with the $45K annual contract?\n\nJohn`
         };
 
-        function loadExample(type) {
-            document.getElementById('threadInput').value = examples[type];
-        }
-
-        function resetForm() {
-            document.getElementById('threadInput').value = '';
-            document.getElementById('results').classList.remove('show');
-            document.getElementById('error').classList.remove('show');
-        }
-
-        function showError(message) {
-            const error = document.getElementById('error');
-            error.textContent = message;
-            error.classList.add('show');
-        }
+        function loadExample(type) { document.getElementById('threadInput').value = examples[type]; }
+        function resetForm() { document.getElementById('threadInput').value = ''; document.getElementById('results').classList.remove('show'); document.getElementById('error').classList.remove('show'); }
+        function showError(message) { const error = document.getElementById('error'); error.textContent = message; error.classList.add('show'); }
 
         function analyzeThreadTemplate(threadText) {
             const emails = threadText.split(/---+/).filter(e => e.trim());
-            const decisions = [];
-            const actions = [];
-            const questions = [];
-            const timeline = [];
-            
+            const decisions = [], actions = [], questions = [], timeline = [];
             const decisionPatterns = /(?:decision|decided|approved|confirmed|we're doing|final call|going with)/i;
             const actionPatterns = /(?:need to|should|must|can you|please|by \w+day|deadline|due)/i;
             const questionPatterns = /\?/;
-            
             emails.forEach((email, idx) => {
                 const lines = email.split('\n').filter(l => l.trim());
                 const dateMatch = email.match(/Date: (.+)/);
                 const fromMatch = email.match(/From: (.+)/);
-                
                 const date = dateMatch ? dateMatch[1].trim() : `Email ${idx + 1}`;
                 const from = fromMatch ? fromMatch[1].split('<')[0].trim() : 'Unknown';
-                
                 lines.forEach(line => {
-                    if (decisionPatterns.test(line) && line.length > 20) {
-                        decisions.push({ decision: line.trim(), who: from, when: date });
-                    }
-                    if (actionPatterns.test(line) && line.length > 15) {
-                        const deadlineMatch = line.match(/by (\w+day|EOD|end of \w+|\w+ \d+)/i);
-                        actions.push({ task: line.trim(), owner: from, deadline: deadlineMatch ? deadlineMatch[1] : null });
-                    }
-                    if (questionPatterns.test(line) && line.length > 10) {
-                        questions.push({ question: line.trim(), context: `Asked by ${from}` });
-                    }
+                    if (decisionPatterns.test(line) && line.length > 20) decisions.push({ decision: line.trim(), who: from, when: date });
+                    if (actionPatterns.test(line) && line.length > 15) { const d = line.match(/by (\w+day|EOD|end of \w+|\w+ \d+)/i); actions.push({ task: line.trim(), owner: from, deadline: d ? d[1] : null }); }
+                    if (questionPatterns.test(line) && line.length > 10) questions.push({ question: line.trim(), context: `Asked by ${from}` });
                 });
-                
-                if (dateMatch) {
-                    const eventLine = lines.find(l => l.length > 30 && !l.includes('From:') && !l.includes('To:') && !l.includes('Subject:'));
-                    if (eventLine) {
-                        timeline.push({ date: date.split(' ').slice(0, 3).join(' '), event: eventLine.substring(0, 100) });
-                    }
-                }
+                if (dateMatch) { const e = lines.find(l => l.length > 30 && !l.includes('From:') && !l.includes('To:') && !l.includes('Subject:')); if (e) timeline.push({ date: date.split(' ').slice(0, 3).join(' '), event: e.substring(0, 100) }); }
             });
-            
-            const summary = `Email thread with ${emails.length} messages discussing ${
-                decisions.length > 0 ? 'decisions about project timeline and budget' :
-                actions.length > 0 ? 'action items and next steps' :
-                'ongoing communication and coordination'
-            }.`;
-            
+            const summary = `Email thread with ${emails.length} messages discussing ${decisions.length > 0 ? 'decisions about project timeline and budget' : actions.length > 0 ? 'action items and next steps' : 'ongoing communication and coordination'}.`;
             const allText = threadText.toLowerCase();
             const contextTopics = [];
             if (allText.includes('budget')) contextTopics.push('budget discussions');
             if (allText.includes('deadline') || allText.includes('launch')) contextTopics.push('timeline concerns');
             if (allText.includes('legal')) contextTopics.push('legal approvals needed');
             if (allText.includes('marketing')) contextTopics.push('marketing coordination');
-            
-            const context = contextTopics.length > 0 
-                ? `This thread involves ${contextTopics.join(', ')}. Key stakeholders are coordinating on deliverables and timelines.`
-                : 'Team members are coordinating on project deliverables and next steps.';
-            
-            return {
-                summary,
-                decisions: decisions.slice(0, 5),
-                actions: actions.slice(0, 5),
-                questions: questions.slice(0, 5),
-                timeline: timeline.slice(0, 6),
-                context
-            };
+            const context = contextTopics.length > 0 ? `This thread involves ${contextTopics.join(', ')}. Key stakeholders are coordinating on deliverables and timelines.` : 'Team members are coordinating on project deliverables and next steps.';
+            return { summary, decisions: decisions.slice(0, 5), actions: actions.slice(0, 5), questions: questions.slice(0, 5), timeline: timeline.slice(0, 6), context };
+        }
+
+        async function analyzeThreadAI(threadText) {
+            const response = await fetch("/.netlify/functions/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ threadText: threadText })
+            });
+            if (!response.ok) { const e = await response.json(); throw new Error(e.error || 'API request failed'); }
+            return await response.json();
         }
 
         async function analyzeThread() {
             const threadInput = document.getElementById('threadInput').value.trim();
-            
-            if (!threadInput) {
-                showError('Please paste an email thread to analyze.');
-                return;
-            }
-
+            if (!threadInput) { showError('Please paste an email thread to analyze.'); return; }
             if (!isPro) {
                 const used = getThreadsUsed();
-                if (used >= FREE_LIMIT) {
-                    showError('You\'ve reached your free limit of 3 threads. Join the waitlist for Pro — unlimited AI-powered analysis!');
-                    document.getElementById('limitReached').style.display = 'block';
-                    return;
-                }
+                if (used >= FREE_LIMIT) { showError('You\'ve reached your free limit of 3 threads per month. Upgrade to Pro for unlimited AI-powered analysis!'); document.getElementById('limitReached').style.display = 'block'; return; }
             }
-
             const error = document.getElementById('error');
             const loading = document.getElementById('loading');
             const results = document.getElementById('results');
             const analyzeBtn = document.getElementById('analyzeBtn');
-
-            error.classList.remove('show');
-            results.classList.remove('show');
-            loading.classList.add('show');
-            analyzeBtn.disabled = true;
-
+            error.classList.remove('show'); results.classList.remove('show'); loading.classList.add('show'); analyzeBtn.disabled = true;
+            if (isPro) document.getElementById('loadingText').textContent = 'AI is reading your thread and extracting decisions, actions and questions...';
             try {
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                const analysis = analyzeThreadTemplate(threadInput);
+                let analysis;
+                if (isPro) { analysis = await analyzeThreadAI(threadInput); } else { await new Promise(resolve => setTimeout(resolve, 1500)); analysis = analyzeThreadTemplate(threadInput); }
                 displayResults(analysis);
-                incrementThreadsUsed();
-            } catch (err) {
-                console.error('Error:', err);
-                showError('Something went wrong analyzing the thread. Please try again.');
-            } finally {
-                loading.classList.remove('show');
-                analyzeBtn.disabled = false;
-            }
+                if (!isPro) incrementThreadsUsed();
+            } catch (err) { console.error('Error:', err); showError('Something went wrong analyzing the thread. Please try again.'); }
+            finally { loading.classList.remove('show'); analyzeBtn.disabled = false; }
+        }
+
+        function exportPDF() {
+            const element = document.getElementById('results');
+            const pdfBtn = document.getElementById('pdfExportBtn');
+            const upgradeCallout = document.getElementById('upgradeCallout');
+
+            // Temporarily hide buttons and callout for clean PDF
+            pdfBtn.style.display = 'none';
+            if (upgradeCallout) upgradeCallout.style.display = 'none';
+
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'ThreadKiller-Analysis.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restore buttons after export
+                if (isPro) pdfBtn.style.display = 'block';
+                else if (upgradeCallout) upgradeCallout.style.display = 'block';
+            });
         }
 
         function displayResults(analysis) {
-            document.getElementById('oneLiner').textContent = analysis.summary;
-
-            const decisionsHtml = analysis.decisions.length > 0 ? analysis.decisions.map(d => `
-                <div class="item">
-                    <div class="item-content">${d.decision}</div>
-                    <div class="item-meta">Decided by: ${d.who} • ${d.when}</div>
-                </div>
-            `).join('') : '<p style="color: #64748B;">No explicit decisions found in this thread.</p>';
-            document.getElementById('decisions').innerHTML = decisionsHtml;
-
-            const actionsHtml = analysis.actions.length > 0 ? analysis.actions.map(a => `
-                <div class="item">
-                    <div class="item-content">${a.task}</div>
-                    <div class="item-meta">Owner: ${a.owner}${a.deadline ? ' • Due: ' + a.deadline : ''}</div>
-                </div>
-            `).join('') : '<p style="color: #64748B;">No action items identified.</p>';
-            document.getElementById('actions').innerHTML = actionsHtml;
-
-            const questionsHtml = analysis.questions.length > 0 ? analysis.questions.map(q => `
-                <div class="item">
-                    <div class="item-content">${q.question}</div>
-                    <div class="item-meta">${q.context}</div>
-                </div>
-            `).join('') : '<p style="color: #64748B;">No unresolved questions.</p>';
-            document.getElementById('questions').innerHTML = questionsHtml;
-
-            const timelineHtml = analysis.timeline.length > 0 ? analysis.timeline.map(t => `
-                <div class="timeline-item">
-                    <div class="timeline-date">${t.date}</div>
-                    <div>${t.event}</div>
-                </div>
-            `).join('') : '<p style="color: #64748B;">Timeline information not available.</p>';
-            document.getElementById('timeline').innerHTML = timelineHtml;
-
-            document.getElementById('context').textContent = analysis.context;
+            document.getElementById('oneLiner').textContent = analysis.summary || '';
+            const decisions = analysis.decisions || [];
+            document.getElementById('decisions').innerHTML = decisions.length > 0 ? decisions.map(d => `<div class="item"><div class="item-content">${typeof d === 'string' ? d : d.decision}</div>${typeof d === 'object' && d.who ? `<div class="item-meta">Decided by: ${d.who} • ${d.when}</div>` : ''}</div>`).join('') : '<p style="color: #64748B;">No explicit decisions found in this thread.</p>';
+            const actionItems = analysis.actionItems || analysis.actions || [];
+            document.getElementById('actions').innerHTML = actionItems.length > 0 ? actionItems.map(a => `<div class="item"><div class="item-content">${a.action || a.task}</div><div class="item-meta">Owner: ${a.owner}${a.deadline ? ' • Due: ' + a.deadline : ''}</div></div>`).join('') : '<p style="color: #64748B;">No action items identified.</p>';
+            const unresolvedQuestions = analysis.unresolvedQuestions || analysis.questions || [];
+            document.getElementById('questions').innerHTML = unresolvedQuestions.length > 0 ? unresolvedQuestions.map(q => `<div class="item"><div class="item-content">${typeof q === 'string' ? q : q.question}</div>${typeof q === 'object' && q.context ? `<div class="item-meta">${q.context}</div>` : ''}</div>`).join('') : '<p style="color: #64748B;">No unresolved questions.</p>';
+            const timeline = analysis.timeline || [];
+            document.getElementById('timeline').innerHTML = timeline.length > 0 ? timeline.map(t => `<div class="timeline-item"><div class="timeline-date">${t.date}</div><div>${t.event}</div></div>`).join('') : '<p style="color: #64748B;">Timeline information not available.</p>';
+            document.getElementById('context').textContent = analysis.context || '';
             document.getElementById('results').classList.add('show');
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (isPro) {
+                const isBusinessTier = proTier === 'business';
+                document.getElementById('resultsTier').textContent = isBusinessTier ? 'Business - AI Powered' : 'Personal Pro - AI Powered';
+                document.getElementById('resultsTier').className = isBusinessTier ? 'tier-indicator business' : 'tier-indicator pro';
+                const upgradeCallout = document.getElementById('upgradeCallout');
+                if (upgradeCallout) upgradeCallout.style.display = 'none';
+                document.getElementById('pdfExportBtn').style.display = 'block';
+            }
         }
 
-        document.getElementById('threadInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-                analyzeThread();
-            }
-        });
+        document.getElementById('threadInput').addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) analyzeThread(); });
     </script>
 </body>
 </html>
