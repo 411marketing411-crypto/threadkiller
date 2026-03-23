@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThreadKiller AI - Instant Email Thread Analysis. No Inbox Access Needed.</title>
+    <title>ThreadKiller AI - Eradicate Project Mistakes Caused By Buried Email Decisions.</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #0F172A;
             --secondary: #3B82F6;
-            --accent: #10B981;
+            --accent: #065F46;
             --danger: #EF4444;
             --warning: #F59E0B;
             --light: #E8EDF5;
@@ -35,7 +36,7 @@
         .usage-banner.pro { background: linear-gradient(135deg, var(--purple), #7C3AED); }
         .usage-banner.business { background: linear-gradient(135deg, #F59E0B, #D97706); }
         .usage-info { display: flex; align-items: center; gap: 1rem; }
-        .usage-count { font-size: 2rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: #B8926A; }
+        .usage-count { font-size: 2rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: #065F46; }
         .upgrade-btn { background: #6B7280; color: white; padding: 0.75rem 1.5rem; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; }
         .upgrade-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary); }
@@ -43,7 +44,7 @@
         textarea { width: 100%; min-height: 300px; padding: 1.5rem; border: 2px solid #A07850; border-radius: 15px; font-size: 1rem; font-family: 'Inter', sans-serif; resize: vertical; transition: border-color 0.3s; background: #B8926A; color: #000000; }
         textarea::placeholder { color: #1F2937; opacity: 1; }
         textarea:focus { outline: none; border-color: var(--secondary); }
-        .helper-text { font-size: 0.9rem; color: #1F2937; margin-top: 0.5rem; }
+        .helper-text { font-size: 0.9rem; color: #374151; margin-top: 0.5rem; }
         .button-group { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
         button { padding: 1.2rem 2.5rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Inter', sans-serif; }
         .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white; flex: 1; min-width: 200px; }
@@ -115,109 +116,127 @@
         .check { color: var(--accent); font-weight: 700; }
         .cross { color: #000000; }
         .coming-soon-cell { color: #000000; font-size: 0.85rem; }
+        .trust-strip { background: #0F172A; padding: 3rem 2rem; }
+        .trust-strip-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+        .trust-card { background: #1E293B; border: 1px solid #334155; border-radius: 12px; padding: 1.75rem; }
+        .trust-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(59,130,246,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .trust-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: #B8926A; margin: 0 0 0.65rem; line-height: 1.3; }
+        .trust-card p { font-size: 14px; color: #94A3B8; line-height: 1.75; margin: 0; max-width: 34ch; }
+        .trust-privacy-block { background: #0F172A; padding: 3rem 2rem; border-top: 1px solid #1E293B; }
+        .trust-privacy-inner { max-width: 760px; margin: 0 auto; }
+        .trust-privacy-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #3B82F6; font-family: 'Space Grotesk', sans-serif; margin-bottom: 6px; }
+        .trust-privacy-heading { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #F1F5F9; margin-bottom: 6px; }
+        .trust-privacy-sub { font-size: 13px; color: #64748B; font-style: italic; margin-bottom: 1.75rem; }
+        .trust-privacy-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+        .trust-privacy-list li { font-size: 14px; color: #94A3B8; line-height: 1.7; padding-left: 0; }
+        .trust-privacy-list li strong { color: #B8926A; font-weight: 600; }
+        .trust-mini-strip { background: #0F172A; padding: 1rem 2rem; text-align: center; border-top: 1px solid #1E293B; border-bottom: 1px solid #1E293B; }
+        .trust-mini-strip p { font-size: 13px; color: #64748B; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.03em; }
+        .trust-mini-strip span { color: #B8926A; margin: 0 0.75rem; }
     </style>
 </head>
 <body>
     <div class="hero">
-        <h1>ThreadKiller AI</h1>
-        <p class="tagline">Gmail summarizes. ThreadKiller extracts decisions, tracks accountability, and finds what's unresolved across any email platform.</p>
-        <div class="tier-badge free" id="currentTier">Free Tier - Smart Analysis</div>
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number">3+ hrs</div>
-                <div class="stat-label">Saved per week</div>
+        <h1>Wrong replies cost real money.<br>Scope drift starts in email.</h1>
+        <p style="color: #B8926A; font-size: clamp(0.95rem, 2vw, 1.15rem); max-width: 700px; margin: 0 auto 1.5rem; font-weight: 300; opacity: 0.9;">ThreadKiller extracts every decision, owner, and unresolved question from your email thread, then drafts a confirmation reply before someone acts on the wrong version. No inbox access required.</p>
+    </div>
+
+    <div class="trust-privacy-block">
+        <div class="trust-privacy-inner">
+            <div class="trust-privacy-label">Trust &amp; Privacy</div>
+            <div class="trust-privacy-heading">ThreadKiller is a standalone, ephemeral tool.<br>Nothing connects, nothing persists.</div>
+            <div class="trust-privacy-sub">Designed for teams handling confidential, privileged, or regulated communications.</div>
+            <ul class="trust-privacy-list">
+                <li><strong>No inbox access:</strong> ThreadKiller does not connect to Gmail, Outlook, Google Workspace, or any email server.</li>
+                <li><strong>Manual input only:</strong> Only the text you choose to paste is processed. Nothing is imported automatically.</li>
+                <li><strong>No training on your threads:</strong> Your pasted thread content is not used to train AI models.</li>
+                <li><strong>No storage after processing:</strong> Thread text is processed to generate your output, then immediately discarded.</li>
+                <li><strong>No hidden mailbox sync:</strong> ThreadKiller is a standalone tool, not an email monitoring platform.</li>
+                <li><strong>Use within your own policies:</strong> Only paste content you are authorised to process, especially for confidential or regulated workflows.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="trust-strip">
+        <div class="trust-strip-inner">
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                        <polyline points="13 2 13 9 20 9"/>
+                    </svg>
+                </div>
+                <h3>No signup required</h3>
+                <p>Paste your thread and get your analysis instantly. No account to create, no confirmation email, no barrier between you and your answer.</p>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Prompt needed</div>
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h3>No inbox connection</h3>
+                <p>We never ask for access to your email account. You choose exactly what to share by copying and pasting: nothing else is ever visible to us.</p>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">30 sec</div>
-                <div class="stat-label">To clarity</div>
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                        <path d="M10 11v6"/><path d="M14 11v6"/>
+                    </svg>
+                </div>
+                <h3>Nothing stored</h3>
+                <p>Your thread content is gone the moment your analysis is complete. We do not retain it, log it, or use it for any other purpose.</p>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="card">
-            <div id="usageBanner" class="usage-banner">
-                <div class="usage-info">
-                    <div>
-                        <div class="usage-count"><span id="threadsUsed">0</span>/3</div>
-                        <div style="font-size: 0.9rem; opacity: 0.9;">threads this month (Free Tier)</div>
-                    </div>
-                </div>
-                <a href="#pricing" class="upgrade-btn">Upgrade to Pro for AI Analysis</a>
-            </div>
-
-            <div id="limitReached" class="limit-reached" style="display: none;">
-                <h3>🎯 You've hit your free limit!</h3>
-                <p>You've analyzed 3 threads this month. Upgrade to Pro for unlimited AI-powered analysis.</p>
-                <div class="pricing-preview">
-                    <div class="price-card featured">
-                        <div class="price-name">Personal Pro</div>
-                        <div class="price-amount">£15<span style="font-size: 1rem;">/mo</span></div>
-                        <div class="price-period">Billed monthly</div>
-                        <ul class="price-features">
-                            <li>Unlimited AI analysis</li>
-                            <li>Advanced context understanding</li>
-                            <li>Up to 2 users</li>
-                            <li>Priority support</li>
-                        </ul>
-                        <button class="btn-primary" onclick="startCheckout('personal')">Upgrade Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="price-name">Business</div>
-                        <div class="price-amount">£29<span style="font-size: 1rem;">/mo</span></div>
-                        <div class="price-period">Billed monthly</div>
-                        <ul class="price-features">
-                            <li>Everything in Personal</li>
-                            <li>Up to 5 users</li>
-                            <li>Commercial use licence</li>
-                            <li>Priority support</li>
-                            <li>PDF Export</li>
-                            <li class="coming-soon">Slack Integration (Coming Soon)</li>
-                        </ul>
-                        <button class="btn-primary" onclick="startCheckout('business')">Upgrade Now</button>
-                    </div>
-                </div>
-            </div>
-
             <div class="error" id="error"></div>
-
-            <h2>📧 Paste Your Email Thread</h2>
-            <p style="color: #1F2937; margin-top: -0.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;">Unlike Copilot or Gemini, ThreadKiller works on <strong>any</strong> email — no account connection needed.</p>
-            
+            <h2> Paste Your Email Thread</h2>
             <div>
-                <label for="threadInput">Copy and paste the entire email thread below:</label>
-                <textarea id="threadInput" placeholder="Paste your email thread here... include all the back-and-forth, replies, forwards - the messier the better! 
-
-Example: Include subject lines, from/to headers, timestamps, and the full message content of each email in the thread."></textarea>
-                <div class="helper-text">
-                    💡 <strong>Free Tier:</strong> Smart template-based analysis (instant results)
-                    <br>
-                    ⚡ <strong>Pro Tier:</strong> AI-powered deep analysis (understands context & nuance)
+                <p style="font-size: 0.95rem; color: #374151; margin-bottom: 0.75rem;">Run this before replying to important project or client emails.</p>
+                <label for="threadInput">Paste any email thread below. Get results in 15 seconds.</label>
+                <textarea id="threadInput" placeholder="Just paste the whole conversation, messy is fine."></textarea>
+                <div class="helper-text" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                    <span> <strong>Free:</strong> Instant smart analysis &nbsp;&nbsp; <strong>Pro:</strong> AI-powered, catches what humans miss</span>
                 </div>
             </div>
-
             <div class="examples">
                 <h4>Try an example thread:</h4>
-                <div class="example-item" onclick="loadExample('project')">
-                    <div class="example-title">🏗️ Messy Project Thread</div>
-                    <div class="example-desc">15 emails about deadline changes, budget discussions, and scope creep</div>
+                <div class="example-item" onclick="loadExample('agency')">
+                    <div class="example-title">Agency Client Revision Thread</div>
+                    <div class="example-desc">17 emails about conflicting feedback, scope creep and an approval that never came</div>
                 </div>
-                <div class="example-item" onclick="loadExample('sales')">
-                    <div class="example-title">💼 Sales Deal Thread</div>
-                    <div class="example-desc">20 emails with contract negotiations, pricing back-and-forth</div>
+                <div class="example-item" onclick="loadExample('recruiter')">
+                    <div class="example-title">Recruiter Candidate Thread</div>
+                    <div class="example-desc">19 emails with shifting requirements, missed feedback and a counteroffer nobody mentioned</div>
+                </div>
+                <div class="example-item" onclick="loadExample('property')">
+                    <div class="example-title">Property Purchase Chain</div>
+                    <div class="example-desc">11 emails, missing documents, completion date at risk</div>
+                </div>
+                <div class="example-item" onclick="loadExample('construction')">
+                    <div class="example-title">Construction Site Dispute</div>
+                    <div class="example-desc">10 emails, change order chaos, contractor and client at odds</div>
+                </div>
+                <div class="example-item" onclick="loadExample('event')">
+                    <div class="example-title">Corporate Event Thread</div>
+                    <div class="example-desc">11 emails, AV changes, catering chaos, one week to go</div>
                 </div>
             </div>
-
             <div class="button-group">
                 <button class="btn-primary" onclick="analyzeThread()" id="analyzeBtn">
-                    🚀 Analyze Thread <span class="tier-indicator free" id="tierBadge">Free - Smart</span>
+                    See what this thread actually decided
+                    <div style="font-size: 0.75rem; font-weight: 400; opacity: 0.8; margin-top: 0.25rem;"><span id="tierBadge" class="tier-indicator free">Free</span></div>
                 </button>
                 <button class="btn-secondary" onclick="resetForm()">🔄 Clear</button>
             </div>
+            <p style="text-align: center; font-size: 0.8rem; color: #374151; margin-top: 0.75rem; letter-spacing: 0.02em;">Private by design: paste only what you choose, process it, move on.</p>
+            <p style="text-align: center; font-size: 0.85rem; color: #374151; margin-top: 0.35rem;">Takes about 15 seconds</p>
         </div>
 
         <div class="loading" id="loading">
@@ -230,91 +249,260 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
                 <h2 style="margin: 0;">Analysis Results</h2>
                 <span class="tier-indicator free" id="resultsTier">Free Tier</span>
             </div>
-
             <div class="summary-section">
-                <h3>📝 One-Sentence Summary</h3>
+                <h3> One-Sentence Summary</h3>
                 <div class="one-liner" id="oneLiner"></div>
             </div>
-
             <div class="section">
-                <h3>🎯 Key Decisions Made</h3>
+                <h3> Key Decisions Made</h3>
                 <div class="item-list" id="decisions"></div>
             </div>
-
             <div class="section">
-                <h3>✅ Action Items</h3>
+                <h3> Action Items</h3>
                 <div class="item-list" id="actions"></div>
             </div>
-
             <div class="section">
-                <h3>❓ Unresolved Questions</h3>
+                <h3> Unresolved Questions</h3>
                 <div class="item-list" id="questions"></div>
             </div>
-
             <div class="section">
-                <h3>⏱️ Timeline</h3>
+                <h3> Timeline</h3>
                 <div class="timeline" id="timeline"></div>
             </div>
-
             <div class="section">
-                <h3>💡 Critical Context</h3>
+                <h3> Critical Context</h3>
                 <div id="context" style="background: #E8EDF5; padding: 1.5rem; border-radius: 12px; font-style: italic;"></div>
             </div>
-
-            <div id="pdfExportBtn" style="display:none; text-align: center; margin-bottom: 1.5rem;">
-                <button class="btn-secondary" onclick="exportPDF()" style="background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border: none;">
-                    📄 Download PDF Report
-                </button>
+            <div id="confirmSendSection" style="display:none; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #EEF2FF, #F0FDF4); border: 2px solid #6D28D9; border-radius: 15px; padding: 2rem;">
+                    <div style="font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; color: #6D28D9; text-transform: uppercase; margin-bottom: 0.75rem;">Before replying to this thread</div>
+                    <div id="confirmLoading" style="display:none; text-align: center; padding: 1rem;">
+                        <div class="spinner" style="width: 40px; height: 40px; margin: 0 auto 0.75rem;"></div>
+                        <p style="color: #475569; font-size: 0.95rem;">Drafting your confirmation email...</p>
+                    </div>
+                    <div id="confirmOutput" style="display:none;">
+                        <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1rem; font-style: italic;">You can paste this directly into the email thread.</p>
+                        <div style="background: white; border: 1px solid #CBD5E1; border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem;">
+                            <div style="font-size: 0.8rem; font-weight: 600; color: #6D28D9; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Subject</div>
+                            <div id="confirmSubject" style="font-weight: 600; color: #0F172A; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #E2E8F0;"></div>
+                            <div style="font-size: 0.8rem; font-weight: 600; color: #6D28D9; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Email Body</div>
+                            <div id="confirmBody" style="white-space: pre-wrap; color: #1F2937; line-height: 1.7; font-size: 0.95rem;"></div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button onclick="copyConfirmEmail()" style="background: linear-gradient(135deg, #6D28D9, #7C3AED); color: white; padding: 0.75rem 1.5rem; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: all 0.3s;">📋 Copy Email</button>
+                            <button onclick="regenerateReply()" style="background: white; color: #374151; border: 2px solid #CBD5E1; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: all 0.3s;">🔄 Regenerate</button>
+                        </div>
+                        <p id="copyConfirmFeedback" style="display:none; color: #059669; font-weight: 600; margin-top: 0.75rem; font-size: 0.9rem;">Copied. You can send this as-is or edit it first.</p>
+                    </div>
+                    <div id="confirmError" style="display:none; background: #FEE2E2; border: 1px solid #FCA5A5; color: #991B1B; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                    <p style="font-size: 0.9rem; color: #374151; margin-bottom: 1rem;">Before replying, confirm alignment with a clear response you can paste into the thread.</p>
+                    <button id="draftReplyBtn" onclick="generateReply()" class="btn-primary" style="background: linear-gradient(135deg, #6D28D9, #7C3AED);">✉️ Draft a confirmation reply</button>
+                    <p style="font-size: 0.8rem; color: #475569; margin-top: 0.5rem;">Creates a short professional email confirming decisions and responsibilities.</p>
+                    <p style="font-size: 0.75rem; color: #6B7280; margin-top: 0.4rem; letter-spacing: 0.03em;">You are always in control of what gets sent.</p>
+                </div>
             </div>
-
+            <div id="pdfExportBtn" style="display:none; text-align: center; margin-bottom: 1.5rem;">
+                <button class="btn-secondary" onclick="exportPDF()" style="background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border: none;">📄 Download PDF Report</button>
+            </div>
             <div class="upgrade-callout" id="upgradeCallout">
-                <h4>⚡ Want Even Better Analysis?</h4>
-                <p>Upgrade to Pro for AI-powered deep analysis that understands context, tone, and complex relationships.</p>
+                <h4>⚡ Your Free Analysis Just Scratched The Surface</h4>
+                <p>Upgrade to Pro for AI-powered analysis that goes deeper into every thread.</p>
                 <ul>
-                    <li>Detects implicit decisions and commitments</li>
-                    <li>Understands sarcasm and subtext</li>
-                    <li>Identifies political dynamics and conflicts</li>
-                    <li>Extracts nuanced action items</li>
-                    <li>Unlimited analysis per month</li>
+                    <li>Check any project or client thread</li>
+                    <li>See approvals, scope changes, and owners clearly</li>
+                    <li>See when no one owns it</li>
+                    <li>Catches the question everyone ignored</li>
+                    <li>Unlimited threads, no monthly cap</li>
                 </ul>
-                <button class="btn-primary" onclick="window.location.hash='pricing'" style="margin-top: 1rem;">
-                    Upgrade to Pro — from £15/month
-                </button>
+                <button class="btn-primary" onclick="window.location.hash='pricing'" style="margin-top: 1rem;">Start using ThreadKiller from £19/month</button>
+            </div>
+            <p style="margin-top: 1.5rem; text-align: center; font-size: 0.95rem; color: #475569;">Unlike Copilot or Gemini, ThreadKiller works on <strong>any</strong> email: no connection to your inbox.</p>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 0;">
+        <p style="text-align: center; font-size: 0.95rem; color: #E8EDF5; margin-bottom: 1.5rem; line-height: 1.7; max-width: 600px; margin-left: auto; margin-right: auto;">Most teams don't realise how many decisions live inside email until they map one out. This is where project misalignment usually starts.</p>
+        <div id="usageBanner" class="usage-banner" style="align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; text-align: center;">
+            <div class="usage-info" style="align-items: center;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div class="usage-count"><span id="threadsUsed">0</span>/3</div>
+                    <div style="font-size: 0.9rem; color: #000000;">Threads this month (Free Tier)</div>
+                </div>
+            </div>
+            <a href="#pricing" class="upgrade-btn" style="color: #000000; text-align: center; display: block; margin: 0 auto;">Start using ThreadKiller ~ Upgrade to Pro</a>
+        </div>
+        <div id="limitReached" class="limit-reached" style="display: none;">
+            <h3>🎯 You've hit your free limit!</h3>
+            <p>You've analyzed 3 threads this month. Upgrade to Pro for unlimited AI-powered analysis.</p>
+            <div class="pricing-preview">
+                <div class="price-card featured">
+                    <div class="price-name">Pro</div>
+                    <div class="price-amount">£19<span style="font-size: 1rem;">/mo</span></div>
+                    <div class="price-period">Billed monthly</div>
+                    <ul class="price-features">
+                        <li>Check any project or client thread</li>
+                        <li>See approvals, changes, and owners clearly</li>
+                        <li>See when no one owns it</li>
+                        <li>Up to 2 users</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startCheckout('personal')">Start Pro</button>
+                </div>
+                <div class="price-card">
+                    <div class="price-name">Business</div>
+                    <div class="price-amount">£49<span style="font-size: 1rem;">/mo</span></div>
+                    <div class="price-period">For client-facing teams</div>
+                    <ul class="price-features">
+                        <li>Everything in Pro</li>
+                        <li>PDF reports for client handovers</li>
+                        <li>Commercial use licence</li>
+                        <li>Up to 5 users</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startCheckout('business')">Start Business</button>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; padding: 2rem 0; border-top: 2px solid #64748B; margin-top: 1rem;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-number" style="color: #065F46;">3+ hrs</div>
+                <div class="stat-label" style="color: #065F46; font-weight: 700;">lost to email threads every week</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-number" style="color: #065F46;">0</div>
+                <div class="stat-label" style="color: #065F46; font-weight: 700;">inbox access needed</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-number" style="color: #065F46;">30 sec</div>
+                <div class="stat-label" style="color: #065F46; font-weight: 700;">to full clarity</div>
             </div>
         </div>
     </div>
 
+    <section id="faq" style="max-width: 720px; margin: 60px auto; padding: 0 24px;">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <div style="font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--secondary); margin-bottom: 10px;">FAQ</div>
+        <h2 style="font-size: 22px; font-weight: 700; color: var(--primary); margin: 0;">Common questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Does ThreadKiller connect to my inbox?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>ThreadKiller never connects to your email account, sees your inbox, or stores your messages. You paste the email text yourself, the analysis runs, and nothing is saved anywhere. Your emails stay entirely private.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>What kind of email threads work best?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>ThreadKiller is built for threads where decisions, responsibilities, or commitments are being discussed: project updates, client briefs, scope conversations, approval chains, and anything where "who said what" matters. The messier and longer the thread, the more useful the output.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>How is this different from Apple Intelligence or Copilot summarising my emails?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Summarisation tells you what was said. ThreadKiller tells you what was decided, who owns it, what is still unresolved, and drafts a confirmation reply you can send immediately. It is built for accountability and action, not reading convenience.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Can't I just paste my thread into ChatGPT?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>You can, but you would need to know exactly what to ask, how to frame it, and how to interpret a freeform response that changes every time. ThreadKiller is a purpose-built tool: the prompting, the structure, and the output format are already done for you. You get consistent, actionable results every time: decisions, owners, open questions, and a ready-to-send confirmation reply, without having to engineer a prompt or piece together an answer yourself.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Do I need to create an account?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Not to try it. Paste a thread and run an analysis, no signup required. Upgrade to Pro or Business for better functionality.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>What does the confirmation reply actually do?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>After your thread is analysed, ThreadKiller drafts a short professional email confirming the decisions and responsibilities it identified. You copy and paste it into your own email client. Nothing is sent automatically, you always decide if and when to send it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Who gets the most value from ThreadKiller?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Anyone who finds long email threads overwhelming, loses track of what was agreed, or needs a clear record of who said what. Agencies, consultants, project managers, recruiters, account managers, healthcare, financial services, insurance, B2B marketing, media, publishing, and e-commerce. If you regularly end up asking "wait, what did we actually agree?" this is for you.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Is my data safe?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>The text you paste is sent securely to the AI model for analysis and is not stored on our servers. We do not log thread content, sell data, or use your inputs to train any model. Once the analysis is complete, the content is gone.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)"><span>Can I cancel my subscription at any time?</span><span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Yes. No contracts, no lock-in. Cancel any time and your access continues until the end of the current billing period. You will not be charged again after cancellation. To cancel or manage your subscription, visit your <a href="https://billing.stripe.com/p/login/7sYfZh96uaH47uN75HdMI00" target="_blank" rel="noopener noreferrer" style="color: #3B82F6; text-decoration: underline;">billing portal</a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .faq-list { border: 1px solid #2D3F55; border-radius: 8px; overflow: hidden; }
+      .faq-item { border-bottom: 1px solid #2D3F55; }
+      .faq-item:last-child { border-bottom: none; }
+      .faq-q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; background: #1E293B; border: none; padding: 18px 24px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; color: #F1F5F9; font-family: inherit; transition: background 0.15s; }
+      .faq-q:hover { background: #2D3F55; }
+      .faq-q.open { color: #B8926A; }
+      .faq-icon { font-size: 20px; font-weight: 300; color: #B8926A; flex-shrink: 0; transition: transform 0.2s; line-height: 1; }
+      .faq-q.open .faq-icon { transform: rotate(45deg); }
+      .faq-a { display: none; padding: 0 24px 20px; background: #0F172A; }
+      .faq-a.open { display: block; }
+      .faq-a p { font-size: 13px; color: #94A3B8; line-height: 1.8; margin: 16px 0 0; }
+    </style>
+
+    <script>
+      function toggleFaq(btn) {
+        const answer = btn.nextElementSibling;
+        const isOpen = btn.classList.contains('open');
+        document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+        document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+        if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+      }
+    </script>
+
+    <section style="max-width: 560px; margin: 60px auto 0; padding: 0 24px;">
+      <div style="background: #1E293B; border: 1px solid #2D3F55; border-radius: 8px; padding: 32px;">
+        <div style="font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #B8926A; margin-bottom: 10px;">FEEDBACK</div>
+        <h3 style="font-size: 18px; font-weight: 700; color: #F1F5F9; margin: 0 0 8px;">Got a feature idea?</h3>
+        <p style="font-size: 13px; color: #94A3B8; line-height: 1.7; margin: 0 0 20px;">Tell us what would make ThreadKiller more useful for you. Every suggestion is read.</p>
+        <form method='POST' name='feature-suggestions'>
+          <input type="hidden" name="form-name" value="feature-suggestions" />
+          <p style="display:none;"><input name="bot-field" /></p>
+          <textarea name="suggestion" placeholder="I'd love it if ThreadKiller could..." required style="width: 100%; background: #0F172A; border: 1px solid #2D3F55; border-radius: 6px; padding: 12px 14px; font-size: 13px; color: #F1F5F9; font-family: inherit; line-height: 1.6; resize: vertical; min-height: 100px; box-sizing: border-box; outline: none;" onfocus="this.style.borderColor='#B8926A'" onblur="this.style.borderColor='#2D3F55'"></textarea>
+          <button type="submit" style="margin-top: 12px; background: #B8926A; color: #0F172A; border: none; border-radius: 6px; padding: 10px 24px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='#C9A47C'" onmouseout="this.style.background='#B8926A'">Send suggestion</button>
+        </form>
+        <div id="suggestionThanks" style="display:none; margin-top: 14px; font-size: 13px; color: #059669; font-weight: 600;">Thanks, we'll take a look.</div>
+      </div>
+    </section>
+
+    <script>
+      document.querySelector('form[name="feature-suggestions"]').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = this;
+        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+        .then(() => { form.style.display = 'none'; document.getElementById('suggestionThanks').style.display = 'block'; })
+        .catch(() => { form.submit(); });
+      });
+    </script>
+
+    <div class="trust-mini-strip" style="margin-top: 60px;">
+        <p>No inbox connection.<span>·</span>No mailbox sync.<span>·</span>No training on your threads.</p>
+    </div>
+
     <div class="footer" id="pricing">
+        <p style="margin-bottom: 0.5rem; font-size: 1rem; color: #000000;">Run this before replying to any thread where approvals, scope, or ownership matter.</p>
+        <p style="margin-bottom: 0.75rem; font-size: 1.05rem; color: #1E293B; font-weight: 600;">Scope drift, missed approvals, and wrong replies all start in email. Catch them before they cost you.</p>
         <h2 style="margin-bottom: 1rem; color: var(--primary);">Choose Your Plan</h2>
         <p style="margin-bottom: 2rem; color: #1F2937;">Start free, upgrade when you need AI-powered analysis</p>
-        
         <div class="comparison-table">
             <table>
                 <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Free</th>
-                        <th>Personal Pro (£15/mo)</th>
-                        <th>Business (£29/mo)</th>
-                    </tr>
+                    <tr><th>Feature</th><th>Free</th><th>Pro (£19/mo)</th><th>Business (£49/mo)</th></tr>
                 </thead>
                 <tbody>
                     <tr><td>Analyses per month</td><td>3</td><td class="check">Unlimited</td><td class="check">Unlimited</td></tr>
                     <tr><td>Analysis type</td><td>Smart template-based</td><td class="check">AI-powered</td><td class="check">AI-powered</td></tr>
-                    <tr><td>Context understanding</td><td>Basic</td><td class="check">Advanced</td><td class="check">Advanced</td></tr>
+                    <tr><td>Context</td><td>Basic</td><td class="check">Advanced</td><td class="check">Advanced</td></tr>
+                    <tr><td>Draft a confirmation reply</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
                     <tr><td>Users</td><td>1</td><td class="check">Up to 2</td><td class="check">Up to 5</td></tr>
                     <tr><td>Commercial use licence</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
                     <tr><td>Priority support</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
                     <tr><td>PDF Export</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
-                    <tr><td>Slack Integration</td><td class="cross">✗</td><td class="cross">✗</td><td class="coming-soon-cell">🔜 Coming Soon</td></tr>
                 </tbody>
             </table>
         </div>
-
         <div class="pricing-preview" style="max-width: 900px; margin: 3rem auto 0;">
             <div class="price-card">
                 <div class="price-name">Free</div>
-                <div class="price-amount">£0</div>
+                <div class="price-amount" style="color: #FFFFFF;">£0</div>
                 <div class="price-period">Forever</div>
                 <ul class="price-features">
                     <li>3 threads per month</li>
@@ -324,129 +512,118 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
                 </ul>
                 <button class="btn-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Get Started Free</button>
             </div>
-            
             <div class="price-card featured">
-                <div class="price-name">Personal Pro</div>
-                <div class="price-amount">£15<span style="font-size: 1rem;">/mo</span></div>
+                <div class="price-name">Pro</div>
+                <div class="price-amount">£19<span style="font-size: 1rem;">/mo</span></div>
                 <div class="price-period">Billed monthly</div>
                 <ul class="price-features">
-                    <li>Unlimited AI analysis</li>
-                    <li>Advanced context understanding</li>
+                    <li>Unlimited AI-powered analysis</li>
+                    <li>See approvals, scope changes, and owners clearly</li>
+                    <li>See when no one owns it</li>
+                    <li>Draft a confirmation reply in one click</li>
                     <li>Up to 2 users</li>
                     <li>Priority support</li>
                 </ul>
-                <button class="btn-primary" onclick="startCheckout('personal')">Upgrade to Personal Pro</button>
+                <button class="btn-primary" onclick="startCheckout('personal')">Start Pro</button>
+                <p style="font-size: 0.85rem; color: #64748B; margin-top: 0.75rem;">One prevented approval mistake covers the cost.</p>
             </div>
-
             <div class="price-card" style="border-color: #1E40AF; border-width: 2px;">
+                <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; color: #1E40AF; text-transform: uppercase; margin-bottom: 0.5rem;">For client-facing teams</div>
                 <div class="price-name">Business</div>
-                <div class="price-amount">£29<span style="font-size: 1rem;">/mo</span></div>
+                <div class="price-amount" style="color: #1E40AF;">£49<span style="font-size: 1rem;">/mo</span></div>
                 <div class="price-period">Billed monthly</div>
                 <ul class="price-features">
-                    <li>Everything in Personal</li>
-                    <li>Up to 5 users</li>
+                    <li>Everything in Pro</li>
+                    <li>PDF reports for client handovers</li>
                     <li>Commercial use licence</li>
+                    <li>Up to 5 users</li>
+                    <li>Built for approval chains and scope risk</li>
                     <li>Priority support</li>
-                    <li>PDF Export</li>
-                    <li class="coming-soon">Slack Integration (Coming Soon)</li>
                 </ul>
-                <button class="btn-primary" onclick="startCheckout('business')">Upgrade to Business</button>
+                <button class="btn-primary" onclick="startCheckout('business')">Start Business</button>
+                <p style="font-size: 0.85rem; color: #64748B; margin-top: 0.75rem;">One avoided scope dispute easily covers the cost.</p>
             </div>
         </div>
-
-        <p style="margin-top: 2rem; font-size: 0.95rem;">Business customers: email <a href="mailto:hello@mitchellsolutions.org" style="color: var(--secondary);">hello@mitchellsolutions.org</a> for priority support</p>
+        <div style="max-width: 600px; margin: 2rem auto 0; background: #1E293B; border: 1px solid #334155; border-radius: 16px; padding: 2rem; text-align: center;">
+            <div style="font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #B8926A; margin-bottom: 0.75rem;">Team / Agency</div>
+            <p style="font-size: 1.1rem; font-weight: 600; color: #F1F5F9; margin-bottom: 0.75rem;">Running a larger team or agency workflow?</p>
+            <p style="font-size: 0.9rem; color: #94A3B8; margin-bottom: 1.25rem; line-height: 1.7;">More users, shared workspaces, branded client exports, and handover packs. Built around the way agencies and consultancies actually work. Get in touch to discuss what you need.</p>
+            <a href="/cdn-cgi/l/email-protection#80e8e5ececefc0ede9f4e3e8e5ececf3efecf5f4e9efeef3aeeff2e7" style="display: inline-block; background: #B8926A; color: #0F172A; font-weight: 700; font-size: 0.95rem; padding: 0.85rem 2rem; border-radius: 10px; text-decoration: none;">Contact us about Team pricing</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.95rem;">Questions: email <a href="/cdn-cgi/l/email-protection#7a121f1616153a17130e19121f16160915160f0e131514095415081d" style="color: var(--secondary);"><span class="__cf_email__" data-cfemail="c2aaa7aeaead82afabb6a1aaa7aeaeb1adaeb7b6abadacb1ecadb0a5">[email&#160;protected]</span></a></p>
         <p style="margin-top: 3rem;">Built with ❤️ to save you from email hell</p>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Free tier uses smart extraction • Pro tier uses Claude AI (your payment covers API costs)</p>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #475569;">
+            <a href='/tk-terms' style='color: #475569; text-decoration: none; margin-right: 1.5rem;'>Terms of Service</a>
+            <a href='/tk-refund-policy' style='color: #475569; text-decoration: none; margin-right: 1.5rem;'>Refund Policy</a>
+            <a href='https://billing.stripe.com/p/login/7sYfZh96uaH47uN75HdMI00' target='_blank' rel='noopener noreferrer' style='color: #475569; text-decoration: none;'>Manage or cancel subscription</a>
+        </p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         const FREE_LIMIT = 3;
-
+        const safeStorage = {
+            getItem: function(key) { try { return localStorage.getItem(key); } catch(e) { return null; } },
+            setItem: function(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+        };
+        let memoryThreadCount = 0;
         function checkProStatus() {
             const params = new URLSearchParams(window.location.search);
-            if (params.get('access') === 'threadkiller2026') {
-                localStorage.setItem('threadkiller_pro', 'true');
-                localStorage.setItem('threadkiller_tier', 'business');
-                window.history.replaceState({}, '', window.location.pathname);
-                return true;
-            }
-            if (params.get('success') === 'true') {
-                localStorage.setItem('threadkiller_pro', 'true');
-                localStorage.setItem('threadkiller_tier', params.get('tier') || 'personal');
-                window.history.replaceState({}, '', window.location.pathname);
-                return true;
-            }
-            return localStorage.getItem('threadkiller_pro') === 'true';
+            if (params.get('access') === 'threadkiller2026') { safeStorage.setItem('threadkiller_pro', 'true'); safeStorage.setItem('threadkiller_tier', 'business'); window.history.replaceState({}, '', window.location.pathname); return true; }
+            if (params.get('success') === 'true') { safeStorage.setItem('threadkiller_pro', 'true'); safeStorage.setItem('threadkiller_tier', params.get('tier') || 'personal'); window.history.replaceState({}, '', window.location.pathname); return true; }
+            return safeStorage.getItem('threadkiller_pro') === 'true';
         }
-
         const isPro = checkProStatus();
-        const proTier = localStorage.getItem('threadkiller_tier') || 'personal';
-
-        const PAYMENT_LINKS = {
-            personal: 'https://buy.stripe.com/14A3cv6Ym16uaGZ75HdMI04',
-            business: 'https://buy.stripe.com/8x26oH5UiaH4cP775HdMI05'
-        };
-
+        const proTier = safeStorage.getItem('threadkiller_tier') || 'personal';
+        const PAYMENT_LINKS = { personal: 'https://buy.stripe.com/fZu7sLbeCcPcaGZ4XzdMI09', business: 'https://buy.stripe.com/bJe9AT96u7uS8yRblXdMI0a' };
         function startCheckout(tier) { window.location.href = PAYMENT_LINKS[tier]; }
-
-        function getThreadsUsed() {
-            const data = JSON.parse(localStorage.getItem('threadkiller_usage') || '{}');
-            const currentMonth = new Date().toISOString().slice(0, 7);
-            if (data.month !== currentMonth) return 0;
-            return data.count || 0;
-        }
-
-        function incrementThreadsUsed() {
-            const currentMonth = new Date().toISOString().slice(0, 7);
-            const count = getThreadsUsed() + 1;
-            localStorage.setItem('threadkiller_usage', JSON.stringify({ month: currentMonth, count: count }));
-            updateUsageBanner();
-            return count;
-        }
-
-        function updateUsageBanner() {
-            const used = getThreadsUsed();
-            document.getElementById('threadsUsed').textContent = used;
-            if (used >= FREE_LIMIT && !isPro) {
-                document.getElementById('limitReached').style.display = 'block';
-                document.getElementById('analyzeBtn').disabled = true;
-            }
-        }
-
+        function getThreadsUsed() { try { const data = JSON.parse(safeStorage.getItem('threadkiller_usage') || '{}'); const currentMonth = new Date().toISOString().slice(0, 7); if (data.month !== currentMonth) return memoryThreadCount; return data.count || memoryThreadCount; } catch(e) { return memoryThreadCount; } }
+        function incrementThreadsUsed() { memoryThreadCount++; try { const currentMonth = new Date().toISOString().slice(0, 7); const count = getThreadsUsed(); safeStorage.setItem('threadkiller_usage', JSON.stringify({ month: currentMonth, count: count })); } catch(e) {} updateUsageBanner(); return memoryThreadCount; }
+        function updateUsageBanner() { const used = getThreadsUsed(); document.getElementById('threadsUsed').textContent = used; if (used >= FREE_LIMIT && !isPro) { document.getElementById('limitReached').style.display = 'block'; document.getElementById('analyzeBtn').disabled = true; } }
         function initUI() {
             updateUsageBanner();
             if (isPro) {
                 const isBusinessTier = proTier === 'business';
-                const tierLabel = isBusinessTier ? 'Business' : 'Personal Pro';
-                document.getElementById('currentTier').textContent = tierLabel + ' — Unlimited AI Analysis';
-                document.getElementById('currentTier').className = isBusinessTier ? 'tier-badge business' : 'tier-badge pro';
+                const tierLabel = isBusinessTier ? 'Business' : 'Pro';
                 document.getElementById('usageBanner').className = isBusinessTier ? 'usage-banner business' : 'usage-banner pro';
-                document.getElementById('usageBanner').innerHTML = `
-                    <div class="usage-info">
-                        <div>
-                            <div style="font-size: 1.5rem; font-weight: 700;">⚡ ${tierLabel}</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Unlimited AI-powered analysis active</div>
-                        </div>
-                    </div>
-                    <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.9rem;">Active</span>
-                `;
+                document.getElementById('usageBanner').innerHTML = `<div class="usage-info"><div><div style="font-size: 1.5rem; font-weight: 700;">⚡ ${tierLabel}</div><div style="font-size: 0.9rem; opacity: 0.9;">Unlimited AI-powered analysis active</div></div></div><span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.9rem;">Active</span>`;
                 document.getElementById('tierBadge').textContent = isBusinessTier ? 'Business - AI' : 'Pro - AI';
                 document.getElementById('tierBadge').className = isBusinessTier ? 'tier-indicator business' : 'tier-indicator pro';
             }
         }
-
         initUI();
-
         const examples = {
-            project: `Subject: Q4 Product Launch - Timeline Update\n\nFrom: Sarah Chen <sarah@company.com>\nTo: Team\nDate: Jan 15, 2026 9:30 AM\n\nHey team,\n\nWe need to push the Q4 launch back by 2 weeks. Development hit some blockers with the new API integration.\n\nSarah\n\n---\n\nFrom: Mike Rodriguez <mike@company.com>\nTo: Sarah Chen\nDate: Jan 15, 2026 10:15 AM\n\nSarah - that impacts our entire marketing timeline. Can we at least do a soft launch on the original date?\n\nMike\n\n---\n\nFrom: Sarah Chen\nTo: Mike Rodriguez\nDate: Jan 15, 2026 11:00 AM\n\nMike - dev says soft launch is possible but risky. Let me check with the team and get back to you by EOD.\n\n---\n\nFrom: Dev Team <dev@company.com>\nTo: Sarah Chen\nDate: Jan 15, 2026 2:30 PM\n\nSarah,\n\nSoft launch possible if we cut features A, B, and C. Full launch needs the extra 2 weeks for proper testing.\n\nAlso heads up - budget is now $15K over due to the extra sprint. Need approval.\n\nDev Team\n\n---\n\nFrom: Sarah Chen\nTo: All\nDate: Jan 16, 2026 9:00 AM\n\nDecision made: We're doing full launch on Feb 15 (2 weeks delayed). No soft launch - too risky.\n\nBudget increase approved - $15K additional for extra sprint.\n\nMike - can marketing adjust to new timeline? Need confirmation by EOD.\n\nSarah\n\n---\n\nFrom: Mike Rodriguez\nTo: Sarah Chen\nDate: Jan 16, 2026 4:45 PM\n\nConfirmed - marketing can adjust. Will need to notify our launch partners about the delay though.\n\nWho's handling partner communications?\n\n---\n\nFrom: Sarah Chen\nTo: Mike Rodriguez\nDate: Jan 17, 2026 8:30 AM\n\nGood question - I'll take ownership of partner comms. Can you draft the key talking points by Friday?\n\nAlso still waiting on legal to approve the new contract terms. Anyone heard from them?`,
-            sales: `Subject: Acme Corp - Enterprise Deal Discussion\n\nFrom: John Sales <john@ourcompany.com>\nTo: Jane Buyer <jane@acmecorp.com>\nDate: Jan 10, 2026 2:00 PM\n\nHi Jane,\n\nGreat connecting yesterday! Here's our enterprise pricing as discussed:\n\n- 100 seats: $50/seat/month = $5,000/month\n- Annual contract: $60,000 (save $12,000 vs monthly)\n- Includes: Premium support, dedicated CSM, custom integrations\n\nLet me know your thoughts!\n\nJohn\n\n---\n\nFrom: Jane Buyer\nTo: John Sales\nDate: Jan 11, 2026 10:30 AM\n\nJohn - pricing is higher than we budgeted. We allocated $40K annually for this solution. Can you work with that number?\n\nAlso, we'd need implementation support included in the price.\n\nJane\n\n---\n\nFrom: John Sales\nTo: Jane Buyer\nDate: Jan 11, 2026 3:00 PM\n\nLet me talk to my manager about the pricing. Implementation support typically costs $5K extra, but I might be able to bundle it.\n\nCan you do $45K annual if we include implementation support?\n\n---\n\nFrom: Jane Buyer\nTo: John Sales\nDate: Jan 12, 2026 9:15 AM\n\n$45K could work, but we need a few contract changes:\n\n1. 30-day cancellation clause (not 90-day)\n2. Built-in data export tools\n3. Quarterly business reviews with our executive team\n\nCan your legal team accommodate these?\n\n---\n\nFrom: John Sales\nTo: Jane Buyer\nDate: Jan 12, 2026 2:30 PM\n\nChecking with legal on #1 and #3. Good news - we already have #2 built into the platform.\n\nQuick question - when do you need this implemented by? We're booking February implementations now.\n\n---\n\nFrom: Jane Buyer\nTo: John Sales\nDate: Jan 13, 2026 11:00 AM\n\nWe need to be live by March 1st for our Q2 planning cycle. Is Feb implementation realistic for that go-live date?\n\nAlso, just realized - we need SSO integration with Okta. Is that included or an add-on?\n\n---\n\nFrom: John Sales\nTo: Jane Buyer\nDate: Jan 13, 2026 4:00 PM\n\nMarch 1 is tight but doable if we start the contract process by Jan 20th.\n\nGreat news - SSO with Okta is included in Enterprise tier at no extra cost!\n\nLegal approved both the 30-day cancellation AND quarterly executive reviews. We're good to proceed.\n\nReady to move forward with the $45K annual contract?\n\nJohn`
+            agency: `Subject: Website Redesign - Round 3 Feedback\n\nFrom: Lisa Harper <lisa@brandco.com>\nTo: James Wu <james@creativeagency.com>\nDate: Feb 3, 2026 9:15 AM\n\nJames, the team reviewed the latest designs. Overall good but Sarah wants the hero section completely different. Can you redo it before Friday?\n\n---\n\nFrom: James Wu\nTo: Lisa Harper\nDate: Feb 3, 2026 10:30 AM\n\nHi Lisa, we can do that but changing the hero will affect the whole layout. This would be a scope change — can you confirm Sarah has signed off on this direction before we start?\n\n---\n\nFrom: Lisa Harper\nTo: James Wu\nDate: Feb 3, 2026 11:45 AM\n\nYes go ahead, Sarah is happy. Also can we add a video banner to the homepage? Client saw it on a competitor site.\n\n---\n\nFrom: James Wu\nTo: Lisa Harper\nDate: Feb 4, 2026 8:30 AM\n\nLisa, video banner is a significant addition, probably 2-3 days extra work. Do you want a change order or shall we absorb it this time?\n\n---\n\nFrom: Sarah Mitchell <sarah@clientco.com>\nTo: Lisa Harper, James Wu\nDate: Feb 4, 2026 2:00 PM\n\nHi both — just jumping in. I actually didn't approve the hero redesign. I said I wasn't sure about it. Can we get on a call?\n\n---\n\nFrom: Lisa Harper\nTo: James Wu\nDate: Feb 4, 2026 2:45 PM\n\nJames hold the hero work for now. Let's do the call first.\n\n---\n\nFrom: James Wu\nTo: Lisa Harper\nDate: Feb 4, 2026 3:00 PM\n\nWe already started this morning based on your email. This is now a problem for our Friday deadline.\n\n---\n\nFrom: Sarah Mitchell\nTo: Lisa Harper, James Wu\nDate: Feb 5, 2026 10:00 AM\n\nSorry for confusion. New direction: keep original hero, add video banner, and change the colour palette to match our new brand guidelines (sending separately).\n\nAlso — who is handling the copy updates? I thought your team was but our marketing manager thinks it's us?\n\n---\n\nFrom: James Wu\nTo: Lisa Harper\nDate: Feb 5, 2026 11:30 AM\n\nLisa — we are now 2 days behind. I need written confirmation of the final scope before we proceed further. Also still waiting on the brand guidelines and clarification on copy ownership.`,
+            recruiter: `Subject: Senior Developer Role - Candidate Update\n\nFrom: Rachel Green <rachel@talentfirst.com>\nTo: David Chen <david@techstartup.com>\nDate: Feb 5, 2026 9:00 AM\n\nHi David, great news — Marcus has confirmed he's interested. Availability for interview?\n\n---\n\nFrom: David Chen\nTo: Rachel Green\nDate: Feb 5, 2026 11:30 AM\n\nBrilliant. Tuesday 2pm works. Can you also send CVs for the other two candidates you mentioned?\n\n---\n\nFrom: Rachel Green\nTo: David Chen\nDate: Feb 5, 2026 12:00 PM\n\nSending CVs now. Note — Priya is only available if the role is remote. Is full remote still on the table?\n\n---\n\nFrom: David Chen\nTo: Rachel Green\nDate: Feb 5, 2026 4:00 PM\n\nWe're hybrid now — 2 days in office minimum. Didn't we discuss this? Probably rules Priya out.\n\n---\n\nFrom: Rachel Green\nTo: David Chen\nDate: Feb 6, 2026 8:45 AM\n\nI don't think we discussed hybrid — my notes say fully remote. This changes things as I've been briefing candidates on remote. Can you confirm the updated requirements?\n\n---\n\nFrom: David Chen\nTo: Rachel Green\nDate: Feb 6, 2026 10:00 AM\n\nYes sorry — changed last week when the CTO came back from leave. Hybrid is firm. Can Marcus do hybrid?\n\n---\n\nFrom: Rachel Green\nTo: David Chen\nDate: Feb 6, 2026 10:30 AM\n\nChecking with Marcus now. Also — Tuesday interview still confirmed?\n\n---\n\nFrom: David Chen\nTo: Rachel Green\nDate: Feb 6, 2026 3:00 PM\n\nTuesday needs to move — can we do Thursday instead? Also can you get references for Marcus before the interview?\n\n---\n\nFrom: Rachel Green\nTo: David Chen\nDate: Feb 7, 2026 9:00 AM\n\nThursday confirmed with Marcus. References requested. Quick update — Marcus has mentioned he has another offer coming in. Timeline may be tight.\n\n---\n\nFrom: David Chen\nTo: Rachel Green\nDate: Feb 7, 2026 9:45 AM\n\nHow serious is the other offer? What's the salary? We may need to move faster. What's Marcus expecting?\n\n---\n\nFrom: Rachel Green\nTo: David Chen\nDate: Feb 10, 2026 8:30 AM\n\nPost-interview update: Marcus is very keen. He's expecting £75k. The other offer is £72k. References came back excellent.\n\n---\n\nFrom: David Chen\nTo: Rachel Green\nDate: Feb 10, 2026 11:00 AM\n\nOur budget is £68k. Is he flexible? Also I need to check with HR — they may have flexibility on the band. Give me 48 hours.\n\n---\n\nFrom: Rachel Green\nTo: David Chen\nDate: Feb 12, 2026 9:00 AM\n\nDavid — Marcus has accepted the other offer this morning. He couldn't wait any longer. Still happy to put forward the other candidates if you want to proceed?`,
+            property: `Subject: Re: 42 Ferndale Road — Completion Update\n\nFrom: Rachel Moore <rachel@greenleafsolicitors.co.uk>\nTo: David Okafor <david@okaforproperties.com>\nDate: Mar 3, 2026 9:00 AM\n\nDavid, we're still waiting on the mortgage offer from the buyer's broker and the search results from the local authority. Completion cannot proceed without both. Can you chase your side?\n\n---\n\nFrom: David Okafor <david@okaforproperties.com>\nTo: Rachel Moore <rachel@greenleafsolicitors.co.uk>; Priya Shah <priya@homefinancenow.co.uk>\nDate: Mar 3, 2026 10:15 AM\n\nPriya — can you update us on the mortgage offer? Rachel is waiting. We have a completion date of March 20th and it's looking tight.\n\n---\n\nFrom: Priya Shah <priya@homefinancenow.co.uk>\nTo: David Okafor; Rachel Moore\nDate: Mar 3, 2026 11:30 AM\n\nThe offer is issued but the buyers haven't signed and returned the acceptance form yet. I emailed them last Thursday. Chasing again now.\n\n---\n\nFrom: Tom Baxter <tom.baxter@gmail.com>\nTo: Priya Shah\nDate: Mar 3, 2026 2:45 PM\n\nHi Priya, sorry — we thought you needed the wet signature version but my wife is away until Sunday. Can we do this digitally?\n\n---\n\nFrom: Priya Shah <priya@homefinancenow.co.uk>\nTo: Tom Baxter; David Okafor; Rachel Moore\nDate: Mar 3, 2026 3:30 PM\n\nYes digital is fine — I'll resend the DocuSign link now. Please both sign today if possible.\n\n---\n\nFrom: Rachel Moore <rachel@greenleafsolicitors.co.uk>\nTo: David Okafor\nDate: Mar 4, 2026 9:00 AM\n\nDavid, I also need to flag — the seller hasn't returned the fixtures and fittings form. We asked for it two weeks ago. Is your client aware this is holding things up?\n\n---\n\nFrom: David Okafor <david@okaforproperties.com>\nTo: Rachel Moore\nDate: Mar 4, 2026 10:00 AM\n\nI'll contact them today. They mentioned they were travelling last week. I'll get it by end of day Friday.\n\n---\n\nFrom: Rachel Moore <rachel@greenleafsolicitors.co.uk>\nTo: David Okafor; Priya Shah; Tom Baxter\nDate: Mar 6, 2026 9:15 AM\n\nUpdate from our side: local authority searches came back this morning — no issues flagged. Still outstanding: (1) signed mortgage acceptance from buyers, (2) fixtures and fittings form from seller. Both needed before we can exchange. March 20th is still possible but only just.\n\n---\n\nFrom: Tom Baxter <tom.baxter@gmail.com>\nTo: Rachel Moore; Priya Shah\nDate: Mar 6, 2026 11:00 AM\n\nWe signed the DocuSign last night — both of us. Did you receive it?\n\n---\n\nFrom: Priya Shah <priya@homefinancenow.co.uk>\nTo: Tom Baxter; Rachel Moore; David Okafor\nDate: Mar 6, 2026 11:45 AM\n\nConfirmed — mortgage acceptance received and processed. Rachel, I'll send you the formal mortgage offer document within the hour.\n\n---\n\nFrom: David Okafor <david@okaforproperties.com>\nTo: Rachel Moore\nDate: Mar 6, 2026 4:55 PM\n\nRachel — seller just emailed to say they've filled in the fixtures form but aren't sure if they should include the garden shed. Can you clarify what's expected?`,
+            construction: `Subject: Re: Unit 4 Fit-Out — Additional Works Query\n\nFrom: Steve Callahan <steve@callahanbuild.co.uk>\nTo: Karen Yip <karen@nexuscommercial.co.uk>\nDate: Feb 10, 2026 8:30 AM\n\nKaren, we've completed the partition walls and electrical first fix as agreed. We've also gone ahead with the raised flooring in the server room as discussed on site last Tuesday. I'll be raising a change order for that — approximately £4,200.\n\n---\n\nFrom: Karen Yip <karen@nexuscommercial.co.uk>\nTo: Steve Callahan\nDate: Feb 10, 2026 10:00 AM\n\nSteve, the raised flooring wasn't authorised. Our site manager Phil mentioned it as a possibility but there was no instruction issued. We can't approve a change order for work that wasn't signed off.\n\n---\n\nFrom: Steve Callahan <steve@callahanbuild.co.uk>\nTo: Karen Yip; Phil Drummond <phil@nexuscommercial.co.uk>\nDate: Feb 10, 2026 10:45 AM\n\nPhil was on site and verbally confirmed to go ahead. I have two of my team who heard it. We wouldn't have started the work otherwise — it's a two-day job.\n\n---\n\nFrom: Phil Drummond <phil@nexuscommercial.co.uk>\nTo: Steve Callahan; Karen Yip\nDate: Feb 10, 2026 11:30 AM\n\nI said it made sense logistically but I didn't say go ahead. I don't have authority to approve additional spend — that goes through Karen.\n\n---\n\nFrom: Karen Yip <karen@nexuscommercial.co.uk>\nTo: Steve Callahan; Phil Drummond\nDate: Feb 10, 2026 1:00 PM\n\nThis is exactly why we have a change order process. Steve, I understand your frustration but we can't retrospectively approve unconfirmed works. Can you send over what you have in writing from Phil and we'll review.\n\n---\n\nFrom: Steve Callahan <steve@callahanbuild.co.uk>\nTo: Karen Yip\nDate: Feb 10, 2026 2:15 PM\n\nNothing in writing — it was a site conversation. I can get a written statement from my site supervisor if that helps. What I can't do is absorb £4,200 for work that was clearly needed and verbally approved.\n\n---\n\nFrom: Karen Yip <karen@nexuscommercial.co.uk>\nTo: Steve Callahan; Phil Drummond\nDate: Feb 11, 2026 9:00 AM\n\nPhil, can you confirm exactly what was said on site Tuesday? We need to resolve this before the next payment milestone.\n\n---\n\nFrom: Phil Drummond <phil@nexuscommercial.co.uk>\nTo: Karen Yip; Steve Callahan\nDate: Feb 11, 2026 10:30 AM\n\nI said the raised flooring would need to happen at some point before handover and asked Steve if his team could factor it in this week while they were already on that section. I didn't say it was authorised spend.\n\n---\n\nFrom: Steve Callahan <steve@callahanbuild.co.uk>\nTo: Karen Yip; Phil Drummond\nDate: Feb 11, 2026 11:15 AM\n\n"Factor it in this week" is an instruction to proceed. I'll get you the written statement from my supervisor today. If we can't agree on this I'll need to involve our contracts manager.\n\n---\n\nFrom: Karen Yip <karen@nexuscommercial.co.uk>\nTo: Steve Callahan; Phil Drummond\nDate: Feb 11, 2026 3:00 PM\n\nLet's get on a call tomorrow morning — 9am. I'd like to resolve this without escalation. Phil please join. Steve, send the supervisor statement before then if you can.`,
+            event: `Subject: Re: Meridian Annual Conference — Final Week Checks\n\nFrom: Donna Leigh <donna@pinpointevents.co.uk>\nTo: James Osei <james@meridiangroup.com>\nDate: Apr 7, 2026 9:00 AM\n\nJames, just running through final checks for next Thursday. Still need: (1) final headcount confirmation, (2) AV brief signed off, (3) dietary requirements from your team. Can you come back to me today on these?\n\n---\n\nFrom: James Osei <james@meridiangroup.com>\nTo: Donna Leigh\nDate: Apr 7, 2026 10:30 AM\n\nHeadcount is 84, up from 80 — four last minute additions from the Leeds office. Re AV — Marcus in our IT team wants to add a live polling element to the afternoon session. Is that possible?\n\n---\n\nFrom: Donna Leigh <donna@pinpointevents.co.uk>\nTo: James Osei; Carlo Ricci <carlo@avstagesolutions.co.uk>\nDate: Apr 7, 2026 11:15 AM\n\nCarlo — James needs live polling added to afternoon session. What do you need from us and is there an additional cost?\n\n---\n\nFrom: Carlo Ricci <carlo@avstagesolutions.co.uk>\nTo: Donna Leigh; James Osei\nDate: Apr 7, 2026 12:00 PM\n\nWe can do it — I'd use Mentimeter on the confidence screen. No hardware change needed. Cost is £180 for setup and licencing on the day. Need the polling questions from Marcus by Monday noon at the latest.\n\n---\n\nFrom: James Osei <james@meridiangroup.com>\nTo: Donna Leigh; Carlo Ricci\nDate: Apr 7, 2026 1:30 PM\n\n£180 is fine, go ahead. I'll tell Marcus about the Monday deadline.\n\n---\n\nFrom: Donna Leigh <donna@pinpointevents.co.uk>\nTo: James Osei\nDate: Apr 7, 2026 2:00 PM\n\nGreat. James I still need dietary requirements — catering finalises numbers with the kitchen tomorrow morning and can't move that deadline.\n\n---\n\nFrom: James Osei <james@meridiangroup.com>\nTo: Donna Leigh\nDate: Apr 7, 2026 4:45 PM\n\nChased the team. So far: 3 vegetarian, 1 vegan, 1 nut allergy (severe). Two people haven't replied yet — I'll follow up first thing tomorrow.\n\n---\n\nFrom: Donna Leigh <donna@pinpointevents.co.uk>\nTo: Francesca Bruno <francesca@goldenforkcatering.co.uk>\nDate: Apr 7, 2026 5:00 PM\n\nFrancesca — updated headcount is 84. Dietary so far: 3 vegetarian, 1 vegan, 1 severe nut allergy. Two outstanding — I'll confirm by 9am tomorrow. Please don't finalise until I send the all-clear.\n\n---\n\nFrom: Francesca Bruno <francesca@goldenforkecatering.co.uk>\nTo: Donna Leigh\nDate: Apr 8, 2026 8:00 AM\n\nDonna, I haven't received a confirmed menu sign-off from the client yet — we agreed that was due last Friday. I can't hold the kitchen team without it. Can you get James to sign off today?\n\n---\n\nFrom: Donna Leigh <donna@pinpointevents.co.uk>\nTo: James Osei\nDate: Apr 8, 2026 8:15 AM\n\nJames — urgent. Catering need the menu signed off today — it was due last Friday. I'm forwarding the menu PDF now. Can you reply with written confirmation you approve it?\n\n---\n\nFrom: James Osei <james@meridiangroup.com>\nTo: Donna Leigh; Francesca Bruno\nDate: Apr 8, 2026 9:30 AM\n\nApologies — I thought my assistant had sent that over. Menu is approved as is. The two remaining dietary requirements: one more vegetarian, and one gluten intolerance (not coeliac, just preference). That's the full list.`
         };
-
         function loadExample(type) { document.getElementById('threadInput').value = examples[type]; }
-        function resetForm() { document.getElementById('threadInput').value = ''; document.getElementById('results').classList.remove('show'); document.getElementById('error').classList.remove('show'); }
+        function resetForm() { document.getElementById('threadInput').value = ''; document.getElementById('results').classList.remove('show'); document.getElementById('error').classList.remove('show'); document.getElementById('confirmSendSection').style.display = 'none'; document.getElementById('confirmOutput').style.display = 'none'; document.getElementById('draftReplyBtn').style.display = 'block'; currentAnalysisData = null; }
+        let currentAnalysisData = null;
+        async function generateReply() {
+            if (!isPro) return;
+            if (!currentAnalysisData) return;
+            const draftBtn = document.getElementById('draftReplyBtn');
+            const confirmLoading = document.getElementById('confirmLoading');
+            const confirmOutput = document.getElementById('confirmOutput');
+            const confirmError = document.getElementById('confirmError');
+            draftBtn.style.display = 'none'; confirmError.style.display = 'none'; confirmOutput.style.display = 'none'; confirmLoading.style.display = 'block';
+            try {
+                const response = await fetch('/.netlify/functions/reply', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decisions: currentAnalysisData.decisions || [], actionItems: currentAnalysisData.actionItems || currentAnalysisData.actions || [], unresolvedQuestions: currentAnalysisData.unresolvedQuestions || currentAnalysisData.questions || [] }) });
+                if (!response.ok) { const e = await response.json(); throw new Error(e.error || 'Failed to generate reply'); }
+                const data = await response.json();
+                document.getElementById('confirmSubject').textContent = data.subject || 'Confirming next steps';
+                document.getElementById('confirmBody').textContent = data.body || '';
+                confirmLoading.style.display = 'none'; confirmOutput.style.display = 'block';
+                document.getElementById('copyConfirmFeedback').style.display = 'none';
+            } catch (err) { console.error('Reply generation error:', err); confirmLoading.style.display = 'none'; confirmError.textContent = 'Something went wrong generating the reply. Please try again.'; confirmError.style.display = 'block'; draftBtn.style.display = 'block'; }
+        }
+        async function regenerateReply() { document.getElementById('confirmOutput').style.display = 'none'; document.getElementById('draftReplyBtn').style.display = 'block'; await generateReply(); }
+        function copyConfirmEmail() { const subject = document.getElementById('confirmSubject').textContent; const body = document.getElementById('confirmBody').textContent; const full = 'Subject: ' + subject + '\n\n' + body; navigator.clipboard.writeText(full).then(() => { const feedback = document.getElementById('copyConfirmFeedback'); feedback.style.display = 'block'; setTimeout(() => { feedback.style.display = 'none'; }, 3000); }); }
         function showError(message) { const error = document.getElementById('error'); error.textContent = message; error.classList.add('show'); }
-
         function analyzeThreadTemplate(threadText) {
             const emails = threadText.split(/---+/).filter(e => e.trim());
             const decisions = [], actions = [], questions = [], timeline = [];
@@ -476,24 +653,15 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
             const context = contextTopics.length > 0 ? `This thread involves ${contextTopics.join(', ')}. Key stakeholders are coordinating on deliverables and timelines.` : 'Team members are coordinating on project deliverables and next steps.';
             return { summary, decisions: decisions.slice(0, 5), actions: actions.slice(0, 5), questions: questions.slice(0, 5), timeline: timeline.slice(0, 6), context };
         }
-
         async function analyzeThreadAI(threadText) {
-            const response = await fetch("/.netlify/functions/analyze", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ threadText: threadText })
-            });
+            const response = await fetch("/.netlify/functions/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ threadText: threadText }) });
             if (!response.ok) { const e = await response.json(); throw new Error(e.error || 'API request failed'); }
             return await response.json();
         }
-
         async function analyzeThread() {
             const threadInput = document.getElementById('threadInput').value.trim();
             if (!threadInput) { showError('Please paste an email thread to analyze.'); return; }
-            if (!isPro) {
-                const used = getThreadsUsed();
-                if (used >= FREE_LIMIT) { showError('You\'ve reached your free limit of 3 threads per month. Upgrade to Pro for unlimited AI-powered analysis!'); document.getElementById('limitReached').style.display = 'block'; return; }
-            }
+            if (!isPro) { const used = getThreadsUsed(); if (used >= FREE_LIMIT) { showError('You\'ve reached your free limit of 3 threads per month. Upgrade to Pro for unlimited AI-powered analysis!'); document.getElementById('limitReached').style.display = 'block'; return; } }
             const error = document.getElementById('error');
             const loading = document.getElementById('loading');
             const results = document.getElementById('results');
@@ -508,32 +676,17 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
             } catch (err) { console.error('Error:', err); showError('Something went wrong analyzing the thread. Please try again.'); }
             finally { loading.classList.remove('show'); analyzeBtn.disabled = false; }
         }
-
         function exportPDF() {
             const element = document.getElementById('results');
             const pdfBtn = document.getElementById('pdfExportBtn');
             const upgradeCallout = document.getElementById('upgradeCallout');
-
-            // Temporarily hide buttons and callout for clean PDF
             pdfBtn.style.display = 'none';
             if (upgradeCallout) upgradeCallout.style.display = 'none';
-
-            const opt = {
-                margin: [10, 10, 10, 10],
-                filename: 'ThreadKiller-Analysis.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                // Restore buttons after export
-                if (isPro) pdfBtn.style.display = 'block';
-                else if (upgradeCallout) upgradeCallout.style.display = 'block';
-            });
+            const opt = { margin: [10, 10, 10, 10], filename: 'ThreadKiller-Analysis.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+            html2pdf().set(opt).from(element).save().then(() => { if (isPro) pdfBtn.style.display = 'block'; else if (upgradeCallout) upgradeCallout.style.display = 'block'; });
         }
-
         function displayResults(analysis) {
+            currentAnalysisData = analysis;
             document.getElementById('oneLiner').textContent = analysis.summary || '';
             const decisions = analysis.decisions || [];
             document.getElementById('decisions').innerHTML = decisions.length > 0 ? decisions.map(d => `<div class="item"><div class="item-content">${typeof d === 'string' ? d : d.decision}</div>${typeof d === 'object' && d.who ? `<div class="item-meta">Decided by: ${d.who} • ${d.when}</div>` : ''}</div>`).join('') : '<p style="color: #64748B;">No explicit decisions found in this thread.</p>';
@@ -547,16 +700,15 @@ Example: Include subject lines, from/to headers, timestamps, and the full messag
             document.getElementById('results').classList.add('show');
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             if (isPro) {
+                document.getElementById('confirmSendSection').style.display = 'block';
+                document.getElementById('confirmOutput').style.display = 'none';
+                document.getElementById('draftReplyBtn').style.display = 'block';
+                document.getElementById('confirmError').style.display = 'none';
                 const isBusinessTier = proTier === 'business';
-                document.getElementById('resultsTier').textContent = isBusinessTier ? 'Business - AI Powered' : 'Personal Pro - AI Powered';
+                document.getElementById('resultsTier').textContent = isBusinessTier ? 'Business - AI Powered' : 'Pro - AI Powered';
                 document.getElementById('resultsTier').className = isBusinessTier ? 'tier-indicator business' : 'tier-indicator pro';
-                const upgradeCallout = document.getElementById('upgradeCallout');
-                if (upgradeCallout) upgradeCallout.style.display = 'none';
-                document.getElementById('pdfExportBtn').style.display = 'block';
-            }
-        }
-
-        document.getElementById('threadInput').addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) analyzeThread(); });
-    </script>
-</body>
-</html>
+                const pdfBtn = document.getElementById('pdfExportBtn');
+                if (isBusinessTier) pdfBtn.style.display = 'block';
+                document.getElementById('upgradeCallout').style.display = 'none';
+            } else {
+                document.getElementById('resultsTier').textContent =
